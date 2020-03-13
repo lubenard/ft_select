@@ -1,0 +1,12 @@
+.DS_Store
+*.a
+*.o
+*.libft/objs
+objs
+ft_select
+vgcore.*
+*.swp
+*.gen
+*.dSYM
+*.swiftdoc
+*.gen

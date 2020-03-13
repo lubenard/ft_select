@@ -6,7 +6,7 @@
 #    By: lubenard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 18:13:02 by lubenard          #+#    #+#              #
-#    Updated: 2020/03/13 14:46:06 by lubenard         ###   ########.fr        #
+#    Updated: 2020/03/13 17:38:52 by lubenard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRCSDIR		= srcs
 INCDIR		= includes
 OBJSDIR		= objs
 
-FILES		= main.c
+FILES		= main.c \
+			  init_termcaps.c
 
 SRCS		= $(addprefix $(SRCSDIR)/, $(FILES))
 OBJS		= $(SRCS:$(SRCSDIR)/%.c=$(OBJSDIR)/%.o)
@@ -28,6 +29,7 @@ OBJSD		= $(SRCS:$(SRCSDIR)/%.c=$(OBJSDIR)/%.d)
 MAKEFLAGS += --silent
 
 ##### Colors #####
+
 _END		= \x1b[0m
 _BOLD		= \x1b[1m
 _UNDER		= \x1b[4m
@@ -78,18 +80,18 @@ clean:
 fclean: clean
 	@echo -e "${_RED}${_BOLD}Cleaning project...${_END}"
 	@rm -f $(NAME)
+	@rm -f $(LIBFT)/libft.a
 	@rm -rf $(OBJDIR)
 	@rm -rf $(NAME).dSYM
 
-re: fclean
-	@$(MAKE)
+re: fclean all
 
 norm:
 	@norminette $(INCDIR) $(SRCSDIR)
 	@echo "Norm $(_GREEN)done!$(_END)"
 
 check_error:
-	@grep -rn "printf" srcs/*.c | grep -v "ft_"
+	@grep -rn "printf" **/*.[ch] | grep -v "ft_"
 	@grep -rn "stdio.h" srcs/*.c
 
 .PHONY: all clean fclean re norm $(LIBFT)
