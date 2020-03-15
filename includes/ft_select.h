@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/13 15:58:37 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/14 12:06:51 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** Error codes handling
 */
 
-enum {ERR_USAGE, ERR_TTY, ERR_TERM};
+enum {ERR_USAGE, ERR_TTY, ERR_TERM, ERR_MALLOC, ERR_ARG_NOT_ASCII};
 
 /*
 ** Color Macro
@@ -40,8 +40,26 @@ enum {ERR_USAGE, ERR_TTY, ERR_TERM};
 # define FT_STRIKE		"\033[9m"
 
 /*
-** termcaps structure
+** Termcaps structure
 */
+
+
+/*
+** linked list elements
+*/
+typedef struct	s_node
+{
+	char			*value;
+	int				is_select;
+	struct s_node	*next;
+	struct s_node	*prev;
+}				t_node;
+
+typedef struct	s_list
+{
+	t_node	*head;
+	size_t	size;
+}				t_list;
 
 /*
 ** Prototypes

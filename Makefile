@@ -6,7 +6,7 @@
 #    By: lubenard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 18:13:02 by lubenard          #+#    #+#              #
-#    Updated: 2020/03/13 17:38:52 by lubenard         ###   ########.fr        #
+#    Updated: 2020/03/14 11:06:56 by lubenard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ INCDIR		= includes
 OBJSDIR		= objs
 
 FILES		= main.c \
-			  init_termcaps.c
+			  init_termcaps.c \
+			  utils.c
 
 SRCS		= $(addprefix $(SRCSDIR)/, $(FILES))
 OBJS		= $(SRCS:$(SRCSDIR)/%.c=$(OBJSDIR)/%.o)
