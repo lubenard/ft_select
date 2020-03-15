@@ -21,6 +21,7 @@ OBJSDIR		= objs
 
 FILES		= main.c \
 			  init_termcaps.c \
+			  parsing.c \
 			  utils.c
 
 SRCS		= $(addprefix $(SRCSDIR)/, $(FILES))

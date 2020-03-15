@@ -55,11 +55,11 @@ typedef struct	s_node
 	struct s_node	*prev;
 }				t_node;
 
-typedef struct	s_list
+typedef struct	s_list_hand
 {
 	t_node	*head;
 	size_t	size;
-}				t_list;
+}				t_list_hand;
 
 /*
 ** Prototypes
@@ -67,5 +67,5 @@ typedef struct	s_list
 
 int init_termcaps(void);
 int error(char *err_mess, int err_code);
-
+int parsing(char **argv);
 #endif

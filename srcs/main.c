@@ -22,9 +22,9 @@ int main(int argc, char **argv)
 		return (error("input/output error, are fds open ?", ERR_TTY));
 	else if (argc == 1)
 		return (error("Usage: ./ft_select args1 args2 args3...", ERR_USAGE));
-	if (ret_code = init_termcaps())
+	if ((ret_code = init_termcaps()))
 		return (ret_code);
-	if (ret_code = parsing(argc, argv))
+	if ((ret_code = parsing(argv)))
 		return (ret_code);
 	return (0);
 }
