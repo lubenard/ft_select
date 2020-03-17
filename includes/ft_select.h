@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/14 12:06:51 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/17 23:26:09 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 ** Error codes handling
 */
 
-enum {ERR_USAGE, ERR_TTY, ERR_TERM, ERR_MALLOC, ERR_ARG_NOT_ASCII};
+enum {ERR_USAGE, ERR_TTY, ERR_TERM, ERR_MALLOC, ERR_ARG_NOT_ASCII,
+	ERR_TCGETATTR, ERR_TCSETATTR};
 
 /*
 ** Color Macro
@@ -48,6 +49,7 @@ typedef struct	s_term
 	int col;
 	int line;
 	struct termios terms;
+	struct termios old_terms;
 }				t_term;
 
 /*
@@ -86,6 +88,7 @@ typedef struct	s_select
 int init_termcaps(t_term *term);
 int error(char *err_mess, int err_code);
 int parsing(t_list_hand* list, char **argv);
-int free_structs(t_list_hand *linked_list);
-
+void free_list(t_node *head);
+int ft_exit(t_select *select);
+int manage_keys(t_select *select, char buffkey[3]);
 #endif

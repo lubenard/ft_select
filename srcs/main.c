@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:35 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/14 11:10:26 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/17 23:29:04 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 #include <curses.h>
 #include <term.h>
+
 void move_cursor()
 {
 	char *cm_cap = tgetstr("cm", NULL);
@@ -31,21 +32,29 @@ int init_structs(t_select **select)
 		ft_memdel((void **)select);
 		return (error("error during malloc", ERR_MALLOC));
 	}
+	if (!((*select)->list = malloc(sizeof(t_list))))
+	{
+		ft_memdel((void **)&(*select)->term);
+		ft_memdel((void **)select);
+		return (error("error during malloc on t_list struct", ERR_MALLOC));
+	}
 	return (0);
 }
 
-void read_input()
+int read_input(t_select *select)
 {
 	ssize_t	ret_read;
-	char	buffkey[1];
+	char	buffkey[3];
 
 	while (1)
 	{
-		ft_bzero(buffkey, 1);
-		ret_read = read(0, buffkey, 1);
-		ft_printf("buffkey = %d\n", buffkey[0]);
-		if (buffkey[0] == 27)
-			ft_printf("KEY ESCAPE PRESSED\n");
+		ft_bzero(buffkey, 3);
+		ret_read = read(0, buffkey, 3);
+		ft_printf("%d %d %d \n", buffkey[0], buffkey[1], buffkey[2]);
+		if (buffkey[0] == 27 && !buffkey[1] && !buffkey[2])
+			return (ft_exit(select));
+		else
+			manage_keys(select, buffkey);
 	}
 }
 
@@ -65,7 +74,7 @@ int main(int argc, char **argv)
 		return (ret_code);
 	if ((ret_code = parsing(select->list, argv)))
 		return (ret_code);
-	read_input();
-	//move_cursor();
+	//print_list();
+	read_input(select);
 	return (0);
 }

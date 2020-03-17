@@ -6,26 +6,23 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 11:06:02 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/14 11:06:06 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/17 22:51:50 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-int free_structs(t_list_hand *linked_list)
+void free_list(t_node *head)
 {
 	t_node	*tmp;
 
-	while (linked_list->head)
+	while (head)
 	{
-		tmp = linked_list->head;
-		linked_list->head = linked_list->head->next;
-		free(tmp);
+		tmp = head;
+		head = head->next;
+		ft_memdel((void *)&tmp);
 	}
-	free(linked_list);
-	return (0);
 }
-
 
 int error(char *err_mess, int err_code)
 {

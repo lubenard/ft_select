@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 15:46:36 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/13 16:25:29 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/17 23:17:15 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include <term.h>
 #include <stdlib.h>
 #include "ft_select.h"
+
+/*
+** Init termcaps and get size of terminal
+*/
 
 int init_termcaps(t_term *term)
 {
@@ -26,10 +30,12 @@ int init_termcaps(t_term *term)
 		ret = tgetent(NULL, "xterm-256color");
 	if (ret == -1)
 		return (error("Please check that TERM=xterm-256color", ERR_TERM));
-	tcgetattr(0, &term->terms);
-	term->terms.c_lflag &= ~(ICANON);
+	if (tcgetattr(0, &term->terms))
+		return (error("cannot get attr !", ERR_TCGETATTR));
+	term->old_terms = term->terms;
+	term->terms.c_lflag &= ~(ECHO | ICANON);
 	if (tcsetattr(0, TCSANOW, &term->terms))
-		return (0);
+		return (error("cannot apply settings to terminal !", ERR_TCSETATTR));
 	term->col = tgetnum("co");
 	term->line = tgetnum("li");
 	return (0);

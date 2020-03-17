@@ -12,6 +12,10 @@
 
 #include "ft_select.h"
 
+/*
+** Create new node to connect to linked list
+*/
+
 t_node *new_node(t_node *last, char *arg)
 {
 	t_node *node;
@@ -31,14 +35,26 @@ t_node *new_node(t_node *last, char *arg)
 	return (node);
 }
 
+void debug()
+{
+/*ft_printf("------DEBUG MODE-------\n");
+	ft_printf("Linked list data:\n");
+	ft_printf("	Head: %p\n", list->head);
+	ft_printf("	Head data: %s\n", list->head->value);
+	ft_printf("	list size: %zu\n", list->size);
+	while (list->head)
+	{
+		ft_printf("	node data: %p value %s is_selected %d next %p prev %p\n", list->head, list->head->value, list->head->is_select, list->head->next, list->head->prev);
+		list->head = list->head->next;
+	}*/
+}
+
 int parsing(t_list_hand *list, char **argv)
 {
 	int			i;
 	t_node		*node;
 
 	i = 1;
-	if (!(list = malloc(sizeof(t_list))))
-		return (error("error during malloc on t_list struct", ERR_MALLOC));
 	list->last = NULL;
 	while (argv[i])
 	{
@@ -51,16 +67,5 @@ int parsing(t_list_hand *list, char **argv)
 		list->last = node;
 	}
 	list->size = i;
-	ft_printf("------DEBUG MODE-------\n");
-	ft_printf("Linked list data:\n");
-	ft_printf("	Head: %p\n", list->head);
-	ft_printf("	Head data: %s\n", list->head->value);
-	ft_printf("	list size: %zu\n", list->size);
-	while (list->head)
-	{
-		ft_printf("	node data: %p value %s is_selected %d next %p prev %p\n", list->head, list->head->value, list->head->is_select, list->head->next, list->head->prev);
-		list->head = list->head->next;
-	}
-	//free_structs(list); not free due to debug
 	return (0);
 }
