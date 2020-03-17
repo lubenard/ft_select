@@ -14,6 +14,7 @@
 # define FT_SELECT_H
 
 # include "libft.h"
+# include <termios.h>
 
 /*
 ** Error codes handling
@@ -42,11 +43,17 @@ enum {ERR_USAGE, ERR_TTY, ERR_TERM, ERR_MALLOC, ERR_ARG_NOT_ASCII};
 /*
 ** Termcaps structure
 */
-
+typedef struct	s_term
+{
+	int col;
+	int line;
+	struct termios terms;
+}				t_term;
 
 /*
 ** linked list elements
 */
+
 typedef struct	s_node
 {
 	char			*value;
@@ -58,14 +65,27 @@ typedef struct	s_node
 typedef struct	s_list_hand
 {
 	t_node	*head;
+	t_node	*last;
 	size_t	size;
 }				t_list_hand;
+
+/*
+** Main structure
+*/
+
+typedef struct	s_select
+{
+	t_list_hand	*list;
+	t_term		*term;
+}				t_select;
 
 /*
 ** Prototypes
 */
 
-int init_termcaps(void);
+int init_termcaps(t_term *term);
 int error(char *err_mess, int err_code);
-int parsing(char **argv);
+int parsing(t_list_hand* list, char **argv);
+int free_structs(t_list_hand *linked_list);
+
 #endif

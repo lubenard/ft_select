@@ -31,24 +31,24 @@ t_node *new_node(t_node *last, char *arg)
 	return (node);
 }
 
-int parsing(char **argv)
+int parsing(t_list_hand *list, char **argv)
 {
-	int		i;
-	t_list_hand	*list;
-	t_node 		*node;
+	int			i;
+	t_node		*node;
 
 	i = 1;
 	if (!(list = malloc(sizeof(t_list))))
 		return (error("error during malloc on t_list struct", ERR_MALLOC));
-	list->head = NULL;	
+	list->last = NULL;
 	while (argv[i])
 	{
 		if (!ft_strisascii(argv[i]))
 			return (error("argument is not ascii", ERR_ARG_NOT_ASCII));
-		if (!(node = new_node(list->head, argv[i++])))
+		if (!(node = new_node(list->last, argv[i++])))
 			return (error("error during malloc on node", ERR_MALLOC)); 
 		if (i - 1 == 1)
 			list->head = node;
+		list->last = node;
 	}
 	list->size = i;
 	ft_printf("------DEBUG MODE-------\n");
@@ -61,5 +61,6 @@ int parsing(char **argv)
 		ft_printf("	node data: %p value %s is_selected %d next %p prev %p\n", list->head, list->head->value, list->head->is_select, list->head->next, list->head->prev);
 		list->head = list->head->next;
 	}
+	//free_structs(list); not free due to debug
 	return (0);
 }

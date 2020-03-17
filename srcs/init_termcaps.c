@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include "ft_select.h"
 
-int init_termcaps(void)
+int init_termcaps(t_term *term)
 {
 	char	*term_type;
 	int		ret;
@@ -26,5 +26,11 @@ int init_termcaps(void)
 		ret = tgetent(NULL, "xterm-256color");
 	if (ret == -1)
 		return (error("Please check that TERM=xterm-256color", ERR_TERM));
+	tcgetattr(0, &term->terms);
+	term->terms.c_lflag &= ~(ICANON);
+	if (tcsetattr(0, TCSANOW, &term->terms))
+		return (0);
+	term->col = tgetnum("co");
+	term->line = tgetnum("li");
 	return (0);
 }
