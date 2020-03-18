@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 11:07:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/14 12:09:35 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/18 14:11:01 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_node *new_node(t_node *last, char *arg)
 	if (!(node = malloc(sizeof(t_node))))
 		return (0);
 	node->value = arg;
+	node->len = ft_strlen(arg);
+	ft_strcpy(node->color, FT_GREEN);
 	node->is_select = 0;
 	node->next = NULL;
 	if (last)

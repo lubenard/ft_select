@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:35 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/17 23:29:04 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/18 14:49:31 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,53 @@ int read_input(t_select *select)
 	{
 		ft_bzero(buffkey, 3);
 		ret_read = read(0, buffkey, 3);
-		ft_printf("%d %d %d \n", buffkey[0], buffkey[1], buffkey[2]);
+		//ft_printf("%d %d %d \n", buffkey[0], buffkey[1], buffkey[2]);
 		if (buffkey[0] == 27 && !buffkey[1] && !buffkey[2])
 			return (ft_exit(select));
 		else
 			manage_keys(select, buffkey);
 	}
+}
+
+size_t compute_biggest_lenght(t_node *head)
+{
+	size_t len;
+
+	len = 0;
+	while (head)
+	{
+		if (head->len > len)
+		{
+			ft_printf("len of %s is the new bigger len\n", head->value);
+			len = head->len;
+		}
+		head = head->next;
+	}
+	ft_printf("len = %d\n", len);
+	return (len);
+}
+
+void print_list(t_select *select)
+{
+	t_node *tmp;
+	size_t nbr_elem;
+	size_t i;
+
+	tmp = select->list->head;
+	if ((nbr_elem = (select->term->col / compute_biggest_lenght(tmp)) - 2) == 0)
+		return ;
+	ft_printf("select->term->col = %d\n", select->term->col);
+	i = 0;
+	while (tmp)
+	{
+		ft_printf("%s%s%s%s ",tmp->color,(tmp->is_select) ? FT_UNDER : "",
+			tmp->value,FT_EOC);
+		i++;
+		if (i == nbr_elem)
+			write(1, "\n", 1);
+		tmp = tmp->next;
+	}
+	write(1, "\n", 1);
 }
 
 int main(int argc, char **argv)
@@ -74,7 +115,7 @@ int main(int argc, char **argv)
 		return (ret_code);
 	if ((ret_code = parsing(select->list, argv)))
 		return (ret_code);
-	//print_list();
+	print_list(select);
 	read_input(select);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/17 23:26:09 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/18 13:56:48 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct	s_node
 {
 	char			*value;
 	int				is_select;
+	size_t			len;
+	char			color[7];
 	struct s_node	*next;
 	struct s_node	*prev;
 }				t_node;
@@ -69,6 +71,7 @@ typedef struct	s_list_hand
 	t_node	*head;
 	t_node	*last;
 	size_t	size;
+	size_t	biggest_lenght;
 }				t_list_hand;
 
 /*
