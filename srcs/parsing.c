@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 11:07:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/18 14:11:01 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/18 19:25:02 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,6 @@ t_node *new_node(t_node *last, char *arg)
 	return (node);
 }
 
-void debug()
-{
-/*ft_printf("------DEBUG MODE-------\n");
-	ft_printf("Linked list data:\n");
-	ft_printf("	Head: %p\n", list->head);
-	ft_printf("	Head data: %s\n", list->head->value);
-	ft_printf("	list size: %zu\n", list->size);
-	while (list->head)
-	{
-		ft_printf("	node data: %p value %s is_selected %d next %p prev %p\n", list->head, list->head->value, list->head->is_select, list->head->next, list->head->prev);
-		list->head = list->head->next;
-	}*/
-}
-
 int parsing(t_list_hand *list, char **argv)
 {
 	int			i;
@@ -68,6 +54,7 @@ int parsing(t_list_hand *list, char **argv)
 			list->head = node;
 		list->last = node;
 	}
+	list->cursor = list->head;
 	list->size = i;
 	return (0);
 }

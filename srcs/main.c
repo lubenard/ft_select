@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:35 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/18 14:49:31 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/18 18:16:17 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,9 @@ size_t compute_biggest_lenght(t_node *head)
 	while (head)
 	{
 		if (head->len > len)
-		{
-			ft_printf("len of %s is the new bigger len\n", head->value);
 			len = head->len;
-		}
 		head = head->next;
 	}
-	ft_printf("len = %d\n", len);
 	return (len);
 }
 
@@ -82,15 +78,18 @@ void print_list(t_select *select)
 	size_t nbr_elem;
 	size_t i;
 
+	char *cl_cap = tgetstr("cl", NULL);
+	tputs (cl_cap, 5, ft_putchar);
 	tmp = select->list->head;
 	if ((nbr_elem = (select->term->col / compute_biggest_lenght(tmp)) - 2) == 0)
 		return ;
-	ft_printf("select->term->col = %d\n", select->term->col);
 	i = 0;
 	while (tmp)
 	{
-		ft_printf("%s%s%s%s ",tmp->color,(tmp->is_select) ? FT_UNDER : "",
-			tmp->value,FT_EOC);
+		ft_printf("%s%s%s%s%s ",tmp->color,
+		(tmp->is_select) ? FT_FILLED : "",
+		(select->list->cursor == tmp) ? FT_UNDER : "",
+		tmp->value,FT_EOC);
 		i++;
 		if (i == nbr_elem)
 			write(1, "\n", 1);

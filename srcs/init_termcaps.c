@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 15:46:36 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/18 12:57:53 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/18 17:44:18 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ int init_termcaps(t_term *term)
 		return (error("cannot apply settings to terminal !", ERR_TCSETATTR));
 	term->col = tgetnum("co");
 	term->line = tgetnum("li");
+	char *civis = tgetstr("vi", NULL);
+	tputs(civis, 1, ft_putchar);
 	return (0);
 }

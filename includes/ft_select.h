@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/18 13:56:48 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/18 17:46:13 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ enum {ERR_USAGE, ERR_TTY, ERR_TERM, ERR_MALLOC, ERR_ARG_NOT_ASCII,
 # define FT_BOLD		"\033[1m"
 # define FT_ITALIC		"\033[3m"
 # define FT_UNDER		"\033[4m"
-# define FT_STRIKE		"\033[9m"
+# define FT_FILLED		"\033[7m"
 
 /*
 ** Termcaps structure
@@ -70,6 +70,7 @@ typedef struct	s_list_hand
 {
 	t_node	*head;
 	t_node	*last;
+	t_node	*cursor;
 	size_t	size;
 	size_t	biggest_lenght;
 }				t_list_hand;
@@ -94,4 +95,5 @@ int parsing(t_list_hand* list, char **argv);
 void free_list(t_node *head);
 int ft_exit(t_select *select);
 int manage_keys(t_select *select, char buffkey[3]);
+void print_list(t_select *select);
 #endif
