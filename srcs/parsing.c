@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 11:07:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/18 19:25:02 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/19 12:52:34 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_node *new_node(t_node *last, char *arg)
 		return (0);
 	node->value = arg;
 	node->len = ft_strlen(arg);
-	ft_strcpy(node->color, FT_GREEN);
+	check_file_exist(node);
 	node->is_select = 0;
 	node->next = NULL;
 	if (last)

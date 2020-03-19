@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 22:48:46 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/19 11:06:01 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/19 12:23:23 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void delete_entry(t_select *select)
 	tmp = select->list->cursor;
 	if (!tmp->next && !tmp->prev)
 	{
-		ft_printf("head vaut %p %s\n", select->list->head, select->list->head->value);
 		ft_exit(select);
 		exit(0);
 	}
@@ -72,8 +71,9 @@ void delete_entry(t_select *select)
 		select->list->head = select->list->cursor->next;
 	if (tmp->prev && !tmp->prev->next)
 		select->list->last = tmp->prev;
-	ft_memdel((void **)tmp);
 	move_right(select);
+	free(tmp);
+	//select->list->size--;
 }
 
 /*

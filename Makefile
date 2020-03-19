@@ -6,7 +6,7 @@
 #    By: lubenard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 18:13:02 by lubenard          #+#    #+#              #
-#    Updated: 2020/03/17 22:52:37 by lubenard         ###   ########.fr        #
+#    Updated: 2020/03/19 12:52:03 by lubenard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ FILES		= main.c \
 			  init_termcaps.c \
 			  parsing.c \
 			  manage_keys.c \
+			  colors.c \
 			  utils.c
 
 SRCS		= $(addprefix $(SRCSDIR)/, $(FILES))
