@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 22:48:46 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/18 22:29:00 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/19 11:06:01 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,22 @@
 #include <term.h>
 #include <curses.h>
 
+/*
+** Exit when key esc is pressed
+**
+** First, restaure old termcaps
+** Then, restaure cursor (ve variable)
+** Finally, clear memory
+*/
+
 int	ft_exit(t_select *select)
 {
+	char *ve;
+
 	ft_printf("Exiting ft_select...\n");
 	if (tcsetattr(0, TCSANOW, &select->term->old_terms))
 		return (error("Cannot restaure old terms !", ERR_TCSETATTR));
-	char *ve = tgetstr("ve", NULL);
+	ve = tgetstr("ve", NULL);
 	tputs(ve, 1, ft_putchar);
 	free_list(select->list->head);
 	ft_memdel((void *)&select->list);
@@ -29,11 +39,41 @@ int	ft_exit(t_select *select)
 	return (0);
 }
 
-void	move_right(t_select *select)
+void move_right(t_select *select)
 {
 	select->list->cursor = (select->list->cursor->next) ?
 		select->list->cursor->next : select->list->head;
 	print_list(select);
+}
+
+void move_left(t_select *select)
+{
+	select->list->cursor = (select->list->cursor->prev) ?
+		select->list->cursor->prev : select->list->last;
+	print_list(select);
+}
+
+void delete_entry(t_select *select)
+{
+	t_node *tmp;
+
+	tmp = select->list->cursor;
+	if (!tmp->next && !tmp->prev)
+	{
+		ft_printf("head vaut %p %s\n", select->list->head, select->list->head->value);
+		ft_exit(select);
+		exit(0);
+	}
+	if (tmp->next)
+		tmp->next->prev = tmp->prev;
+	if (tmp->prev)
+		tmp->prev->next = tmp->next;
+	if (tmp->next && !tmp->next->prev)
+		select->list->head = select->list->cursor->next;
+	if (tmp->prev && !tmp->prev->next)
+		select->list->last = tmp->prev;
+	ft_memdel((void **)tmp);
+	move_right(select);
 }
 
 /*
@@ -46,36 +86,33 @@ void	move_right(t_select *select)
 ** 185    27       91       67      key right
 ** 32     32       0        0       key space
 ** 10     10       0        0       key enter
+** 127    127      0        0       key del
+** 126    126      0        0       key suppr
 */
 
 int manage_keys(t_select *select, char key[3])
 {
 	size_t sum;
-	//ft_printf("buffkey = %d\n", buffkey[0]);
+	//ft_printf("%d %d %d\n", key[0], key[1], key[2]);
 	sum = key[0] + key[1] + key[2];
+	//ft_printf("key = %zu\n", sum);
 	if (sum == 183)
-	{
 		ft_printf("KEY UP\n");
-	}
 	else if (sum == 184)
-	{
 		ft_printf("KEY DOWN\n");
-	}
 	else if (sum == 186)
-	{
-		select->list->cursor = (select->list->cursor->prev) ?
-			select->list->cursor->prev : select->list->last;
-		print_list(select);
-	}
+		move_left(select);
 	else if (sum == 185)
 		move_right(select);
-	if (sum == 32)
+	else if (sum == 32)
 	{
 		select->list->cursor->is_select = (!select->list->cursor->is_select) ?
 			1 : 0;
 		move_right(select);
 	}
-	if (sum == 10)
+	else if (sum == 10)
 		ft_printf("KEY RETURN\n");
+	else if (sum == 127 || sum == 126)
+		delete_entry(select);
 	return (0);
 }
