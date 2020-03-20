@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:35 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/18 18:16:17 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/20 10:14:53 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@
 
 #include <curses.h>
 #include <term.h>
-
-void move_cursor()
-{
-	char *cm_cap = tgetstr("cm", NULL);
-	tputs(tgoto(cm_cap, 5, 5), 1, putchar);
-}
 
 int init_structs(t_select **select)
 {
@@ -50,7 +44,6 @@ int read_input(t_select *select)
 	{
 		ft_bzero(buffkey, 3);
 		ret_read = read(0, buffkey, 3);
-		//ft_printf("%d %d %d \n", buffkey[0], buffkey[1], buffkey[2]);
 		if (buffkey[0] == 27 && !buffkey[1] && !buffkey[2])
 			return (ft_exit(select));
 		else
@@ -77,22 +70,28 @@ void print_list(t_select *select)
 	t_node *tmp;
 	size_t nbr_elem;
 	size_t i;
+	size_t biggest_len;
 
 	char *cl_cap = tgetstr("cl", NULL);
 	tputs (cl_cap, 5, ft_putchar);
 	tmp = select->list->head;
-	if ((nbr_elem = (select->term->col / compute_biggest_lenght(tmp)) - 2) == 0)
+	biggest_len = compute_biggest_lenght(tmp);
+	if (!(nbr_elem = (select->term->col / biggest_len)+ 1))
 		return ;
+	ft_printf("nbr_elem = %zu\n", nbr_elem);
 	i = 0;
 	while (tmp)
 	{
-		ft_printf("%s%s%s%s%s ",tmp->color,
+		ft_printf("%s%s%s%s%s%-*s",tmp->color,
 		(tmp->is_select) ? FT_FILLED : "",
 		(select->list->cursor == tmp) ? FT_UNDER : "",
-		tmp->value,FT_EOC);
+		tmp->value,FT_EOC,biggest_len - ft_strlen(tmp->value) + 1, "");
 		i++;
 		if (i == nbr_elem)
+		{
 			write(1, "\n", 1);
+			i = 0;
+		}
 		tmp = tmp->next;
 	}
 	write(1, "\n", 1);
