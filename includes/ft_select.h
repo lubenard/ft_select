@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/23 16:06:49 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/23 18:42:18 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,20 @@ enum {ERR_USAGE, ERR_TTY, ERR_TERM, ERR_MALLOC, ERR_ARG_NOT_ASCII,
 # define FT_UNDER		"\033[4m"
 # define FT_FILLED		"\033[7m"
 
+# define UP				1
+# define DOWN			2
+# define LEFT			3
+# define RIGHT			4
+
 /*
 ** Termcaps structure
 */
+
 typedef struct	s_term
 {
-	int col;
-	int line;
+	int		col;
+	int		line;
+	char	*clear;
 	struct termios terms;
 	struct termios old_terms;
 }				t_term;
@@ -72,7 +79,8 @@ typedef struct	s_list_hand
 	t_node	*last;
 	t_node	*cursor;
 	size_t	size;
-	size_t	biggest_lenght;
+	size_t	biggest_len;
+	size_t	nbr_elem;
 }				t_list_hand;
 
 /*

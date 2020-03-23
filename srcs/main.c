@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:35 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/23 16:07:06 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/23 18:41:41 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int init_structs(t_select **select)
 		ft_memdel((void **)select);
 		return (error("error during malloc", ERR_MALLOC));
 	}
-	if (!((*select)->list = malloc(sizeof(t_list))))
+	if (!((*select)->list = malloc(sizeof(t_list_hand))))
 	{
 		ft_memdel((void **)&(*select)->term);
 		ft_memdel((void **)select);
@@ -74,25 +74,20 @@ int ft_putchar_input(int c)
 void print_list(t_select *select)
 {
 	t_node *tmp;
-	size_t nbr_elem;
 	size_t i;
-	size_t biggest_len;
 
-	char *cl_cap = tgetstr("cl", NULL);
-	tputs (cl_cap, 1, ft_putchar_input);
+	tputs (select->term->clear, 1, ft_putchar_input);
 	tmp = select->list->head;
-	biggest_len = compute_biggest_lenght(tmp);
-	if (!(nbr_elem = (select->term->col / biggest_len)+ 1))
-		return ;
 	i = 0;
 	while (tmp)
 	{
 		ft_dprintf(0,"%s%s%s%s%s%-*s",tmp->color,
 		(tmp->is_select) ? FT_FILLED : "",
 		(select->list->cursor == tmp) ? FT_UNDER : "",
-		tmp->value,FT_EOC,biggest_len - ft_strlen(tmp->value) + 1, "");
+		tmp->value,FT_EOC,select->list->biggest_len -
+		ft_strlen(tmp->value) + 1, "");
 		i++;
-		if (i == nbr_elem)
+		if (i == select->list->nbr_elem)
 		{
 			write(0, "\n", 1);
 			i = 0;
@@ -108,7 +103,7 @@ int main(int argc, char **argv)
 	t_select	*select;
 
 	ret_code = 0;
-	if (!isatty(0))// || !isatty(1))
+	if (!isatty(0))
 		return (error("input/output error, are fds open ?", ERR_TTY));
 	else if (argc == 1)
 		return (error("Usage: ./ft_select args1 args2 args3...", ERR_USAGE));
@@ -118,6 +113,10 @@ int main(int argc, char **argv)
 		return (ret_code);
 	if ((ret_code = parsing(select->list, argv)))
 		return (ret_code);
+	select->list->biggest_len = compute_biggest_lenght(select->list->head);
+	if (!(select->list->nbr_elem = (select->term->col /
+	select->list->biggest_len) + 1))
+		return (1);
 	print_list(select);
 	read_input(select);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 22:48:46 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/23 16:08:28 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/23 18:51:18 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,7 @@ void delete_entry(t_select *select)
 
 	tmp = select->list->cursor;
 	if (!tmp->next && !tmp->prev)
-	{
 		ft_exit(select);
-		exit(0);
-	}
 	if (tmp->next)
 		tmp->next->prev = tmp->prev;
 	if (tmp->prev)
@@ -73,7 +70,31 @@ void delete_entry(t_select *select)
 		select->list->last = tmp->prev;
 	move_right(select);
 	free(tmp);
-	//select->list->size--;
+	select->list->size--;
+}
+
+void move_key(t_select *select, int move)
+{
+	if (move == UP)
+	{
+		size_t i;
+		i = 0;
+		while (i != select->list->nbr_elem)
+		{
+			move_left(select);
+			i++;
+		}
+	}
+	else if (move == DOWN)
+	{
+		size_t i;
+		i = 0;
+		while (i != select->list->nbr_elem)
+		{
+			move_right(select);
+			i++;
+		}
+	}
 }
 
 /*
@@ -97,9 +118,9 @@ int manage_keys(t_select *select, char key[3])
 	sum = key[0] + key[1] + key[2];
 	//ft_printf("key = %zu\n", sum);
 	if (sum == 183)
-		ft_printf("KEY UP\n");
+		move_key(select, UP);
 	else if (sum == 184)
-		ft_printf("KEY DOWN\n");
+		move_key(select, DOWN);
 	else if (sum == 186)
 		move_left(select);
 	else if (sum == 185)

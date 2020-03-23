@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 15:46:36 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/23 16:06:17 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/23 17:28:15 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,22 @@
 #include <stdlib.h>
 #include "ft_select.h"
 
+void	get_data_termcaps(t_term *term)
+{
+	char *civis;
+
+	term->col = tgetnum("co");
+	term->line = tgetnum("li");
+	term->clear = tgetstr("cl", NULL);
+	civis = tgetstr("vi", NULL);
+	tputs(civis, 1, ft_putchar_input);
+}
+
 /*
 ** Init termcaps and get size of terminal
 */
 
-int init_termcaps(t_term *term)
+int		init_termcaps(t_term *term)
 {
 	char	*term_type;
 	int		ret;
@@ -36,9 +47,6 @@ int init_termcaps(t_term *term)
 	term->terms.c_lflag &= ~(ECHO | ICANON);
 	if (tcsetattr(0, TCSANOW, &term->terms))
 		return (error("cannot apply settings to terminal !", ERR_TCSETATTR));
-	term->col = tgetnum("co");
-	term->line = tgetnum("li");
-	char *civis = tgetstr("vi", NULL);
-	tputs(civis, 1, ft_putchar_input);
+	get_data_termcaps(term);
 	return (0);
 }
