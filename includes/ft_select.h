@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/19 12:53:04 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/23 16:06:49 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,7 @@ int ft_exit(t_select *select);
 int manage_keys(t_select *select, char buffkey[3]);
 void print_list(t_select *select);
 void check_file_exist(t_node *node);
+int return_choice(t_node *head);
+
+int ft_putchar_input(int c);
 #endif

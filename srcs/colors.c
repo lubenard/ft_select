@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 12:27:40 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/19 13:37:29 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/23 15:50:12 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ void	check_file_exist(t_node *node)
 	if (!access(node->value, F_OK))
 		ft_strcpy(node->color, determine_color(node->value));
 	else
-		ft_strcpy(node->color, FT_WHITE);
+		ft_strcpy(node->color, FT_CYAN);
 }

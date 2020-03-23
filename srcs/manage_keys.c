@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 22:48:46 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/19 12:23:23 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/23 16:08:28 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ int	ft_exit(t_select *select)
 {
 	char *ve;
 
-	ft_printf("Exiting ft_select...\n");
+	ft_dprintf(0, "Exiting ft_select...\n");
 	if (tcsetattr(0, TCSANOW, &select->term->old_terms))
 		return (error("Cannot restaure old terms !", ERR_TCSETATTR));
 	ve = tgetstr("ve", NULL);
-	tputs(ve, 1, ft_putchar);
+	tputs(ve, 1, ft_putchar_input);
 	free_list(select->list->head);
 	ft_memdel((void *)&select->list);
 	ft_memdel((void *)&select->term);
 	ft_memdel((void *)&select);
-	return (0);
+	exit (0);
 }
 
 void move_right(t_select *select)
@@ -111,7 +111,10 @@ int manage_keys(t_select *select, char key[3])
 		move_right(select);
 	}
 	else if (sum == 10)
-		ft_printf("KEY RETURN\n");
+	{
+		return_choice(select->list->head);
+		ft_exit(select);
+	}
 	else if (sum == 127 || sum == 126)
 		delete_entry(select);
 	return (0);

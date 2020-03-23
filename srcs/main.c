@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:35 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/20 10:14:53 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/23 16:07:06 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int init_structs(t_select **select)
 	return (0);
 }
 
-int read_input(t_select *select)
+void read_input(t_select *select)
 {
 	ssize_t	ret_read;
 	char	buffkey[3];
@@ -45,7 +45,7 @@ int read_input(t_select *select)
 		ft_bzero(buffkey, 3);
 		ret_read = read(0, buffkey, 3);
 		if (buffkey[0] == 27 && !buffkey[1] && !buffkey[2])
-			return (ft_exit(select));
+			ft_exit(select);
 		else
 			manage_keys(select, buffkey);
 	}
@@ -65,6 +65,12 @@ size_t compute_biggest_lenght(t_node *head)
 	return (len);
 }
 
+int ft_putchar_input(int c)
+{
+	write(0, &c, 1);
+	return (0);
+}
+
 void print_list(t_select *select)
 {
 	t_node *tmp;
@@ -73,28 +79,27 @@ void print_list(t_select *select)
 	size_t biggest_len;
 
 	char *cl_cap = tgetstr("cl", NULL);
-	tputs (cl_cap, 5, ft_putchar);
+	tputs (cl_cap, 1, ft_putchar_input);
 	tmp = select->list->head;
 	biggest_len = compute_biggest_lenght(tmp);
 	if (!(nbr_elem = (select->term->col / biggest_len)+ 1))
 		return ;
-	ft_printf("nbr_elem = %zu\n", nbr_elem);
 	i = 0;
 	while (tmp)
 	{
-		ft_printf("%s%s%s%s%s%-*s",tmp->color,
+		ft_dprintf(0,"%s%s%s%s%s%-*s",tmp->color,
 		(tmp->is_select) ? FT_FILLED : "",
 		(select->list->cursor == tmp) ? FT_UNDER : "",
 		tmp->value,FT_EOC,biggest_len - ft_strlen(tmp->value) + 1, "");
 		i++;
 		if (i == nbr_elem)
 		{
-			write(1, "\n", 1);
+			write(0, "\n", 1);
 			i = 0;
 		}
 		tmp = tmp->next;
 	}
-	write(1, "\n", 1);
+	write(0, "\n", 1);
 }
 
 int main(int argc, char **argv)
@@ -103,7 +108,7 @@ int main(int argc, char **argv)
 	t_select	*select;
 
 	ret_code = 0;
-	if (!isatty(0) || !isatty(1))
+	if (!isatty(0))// || !isatty(1))
 		return (error("input/output error, are fds open ?", ERR_TTY));
 	else if (argc == 1)
 		return (error("Usage: ./ft_select args1 args2 args3...", ERR_USAGE));
