@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/23 18:42:18 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/24 19:07:01 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ enum {ERR_USAGE, ERR_TTY, ERR_TERM, ERR_MALLOC, ERR_ARG_NOT_ASCII,
 # define FT_UNDER		"\033[4m"
 # define FT_FILLED		"\033[7m"
 
-# define UP				1
-# define DOWN			2
-# define LEFT			3
-# define RIGHT			4
+# define UP				183
+# define DOWN			184
+# define LEFT			186
+# define RIGHT			185
 
 /*
 ** Termcaps structure
@@ -68,6 +68,7 @@ typedef struct	s_node
 	char			*value;
 	int				is_select;
 	size_t			len;
+	size_t			index;
 	char			color[7];
 	struct s_node	*next;
 	struct s_node	*prev;
@@ -96,6 +97,20 @@ typedef struct	s_select
 /*
 ** Prototypes
 */
+
+/*
+** Move keys functions
+*/
+void move_right(t_select *select);
+void move_left(t_select *select);
+void move_up(t_select *select);
+void move_down(t_select *select);
+
+/*
+** Handle signal
+*/
+
+int handle_signals(void);
 
 int init_termcaps(t_term *term);
 int error(char *err_mess, int err_code);

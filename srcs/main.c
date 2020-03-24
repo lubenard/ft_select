@@ -6,13 +6,12 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:35 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/23 18:41:41 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/24 19:14:45 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "ft_select.h"
-
 
 #include <curses.h>
 #include <term.h>
@@ -89,7 +88,7 @@ void print_list(t_select *select)
 		i++;
 		if (i == select->list->nbr_elem)
 		{
-			write(0, "\n", 1);
+			write(0, "\n\n", 2);
 			i = 0;
 		}
 		tmp = tmp->next;
@@ -115,8 +114,9 @@ int main(int argc, char **argv)
 		return (ret_code);
 	select->list->biggest_len = compute_biggest_lenght(select->list->head);
 	if (!(select->list->nbr_elem = (select->term->col /
-	select->list->biggest_len) + 1))
+	select->list->biggest_len)))
 		return (1);
+	//handle_signals();
 	print_list(select);
 	read_input(select);
 	return (0);

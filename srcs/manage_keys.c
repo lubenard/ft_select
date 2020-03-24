@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 22:48:46 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/23 18:51:18 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/24 15:30:10 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,6 @@ int	ft_exit(t_select *select)
 	exit (0);
 }
 
-void move_right(t_select *select)
-{
-	select->list->cursor = (select->list->cursor->next) ?
-		select->list->cursor->next : select->list->head;
-	print_list(select);
-}
-
-void move_left(t_select *select)
-{
-	select->list->cursor = (select->list->cursor->prev) ?
-		select->list->cursor->prev : select->list->last;
-	print_list(select);
-}
-
 void delete_entry(t_select *select)
 {
 	t_node *tmp;
@@ -76,25 +62,13 @@ void delete_entry(t_select *select)
 void move_key(t_select *select, int move)
 {
 	if (move == UP)
-	{
-		size_t i;
-		i = 0;
-		while (i != select->list->nbr_elem)
-		{
-			move_left(select);
-			i++;
-		}
-	}
+		move_up(select);
 	else if (move == DOWN)
-	{
-		size_t i;
-		i = 0;
-		while (i != select->list->nbr_elem)
-		{
-			move_right(select);
-			i++;
-		}
-	}
+		move_down(select);
+	else if (move == LEFT)
+		move_left(select);
+	else if (move == RIGHT)
+		move_right(select);
 }
 
 /*
@@ -114,17 +88,11 @@ void move_key(t_select *select, int move)
 int manage_keys(t_select *select, char key[3])
 {
 	size_t sum;
-	//ft_printf("%d %d %d\n", key[0], key[1], key[2]);
+
 	sum = key[0] + key[1] + key[2];
-	//ft_printf("key = %zu\n", sum);
-	if (sum == 183)
-		move_key(select, UP);
-	else if (sum == 184)
-		move_key(select, DOWN);
-	else if (sum == 186)
-		move_left(select);
-	else if (sum == 185)
-		move_right(select);
+	//ft_printf("%d %d %d, sum = %zu\n", key[0], key[1], key[2], sum);
+	if (sum >= 183 || sum <= 186)
+		move_key(select, sum);
 	else if (sum == 32)
 	{
 		select->list->cursor->is_select = (!select->list->cursor->is_select) ?

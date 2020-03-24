@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 11:07:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/23 17:01:27 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/24 17:22:06 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int parsing(t_list_hand *list, char **argv)
 		if (!ft_strisascii(argv[i]))
 			return (error("argument is not ascii", ERR_ARG_NOT_ASCII));
 		if (!(node = new_node(list->last, argv[i++])))
-			return (error("error during malloc on node", ERR_MALLOC)); 
+			return (error("error during malloc on node", ERR_MALLOC));
+		node->index = i - 1;
 		if (i - 1 == 1)
 			list->head = node;
 		list->last = node;
