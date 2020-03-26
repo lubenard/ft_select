@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 22:48:46 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/26 16:06:06 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/26 18:17:09 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	ft_exit(t_select *select)
 	free_list(select->list->head);
 	ft_memdel((void *)&select->list);
 	ft_memdel((void *)&select->term);
+	ft_strdel(&select->research);
 	ft_memdel((void *)&select);
 	exit(0);
 }

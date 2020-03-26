@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:35 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/26 16:12:10 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/26 18:26:46 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ int init_structs(void)
 		ft_memdel((void **)ft_select);
 		return (error("error during malloc on t_list struct", ERR_MALLOC));
 	}
+	if (!(ft_select->research = malloc(sizeof(t_list_hand))))
+	{
+		ft_memdel((void **)ft_select->term);
+		ft_memdel((void **)ft_select);
+		return (error("error during malloc on t_list struct", ERR_MALLOC));
+	}
+	ft_select->research = "";
 	return (0);
 }
 
@@ -45,7 +52,9 @@ void read_input(t_select *select)
 	{
 		ft_bzero(buffkey, 3);
 		ret_read = read(0, buffkey, 3);
-		if (buffkey[0] == 27 && !buffkey[1] && !buffkey[2])
+		if (ft_isprint(buffkey[0]))
+			research(select, buffkey[0]);
+		else if (buffkey[0] == 27 && !buffkey[1] && !buffkey[2])
 			ft_exit(select);
 		else
 			manage_keys(select, buffkey);

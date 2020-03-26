@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/26 16:03:47 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/26 18:04:43 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct	s_select
 {
 	t_list_hand	*list;
 	t_term		*term;
+	char		*research;
 }				t_select;
 
 /*
@@ -146,5 +147,6 @@ int				ft_putchar_input(int c);
 int				ft_exit(t_select *select);
 void			check_file_exist(t_node *node);
 void			free_list(t_node *head);
+int				research(t_select *select, char buffkey);
 
 #endif

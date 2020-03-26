@@ -6,7 +6,7 @@
 #    By: lubenard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 18:13:02 by lubenard          #+#    #+#              #
-#    Updated: 2020/03/24 18:44:52 by lubenard         ###   ########.fr        #
+#    Updated: 2020/03/26 17:36:24 by lubenard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ FILES		= main.c \
 			  colors.c \
 			  move_keys.c \
 			  signals.c \
+			  research.c \
 			  utils.c
 
 SRCS		= $(addprefix $(SRCSDIR)/, $(FILES))
