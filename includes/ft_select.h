@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/24 19:07:01 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/26 14:47:00 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void move_down(t_select *select);
 ** Handle signal
 */
 
-int handle_signals(void);
+void handle_signals(void);
 
 int init_termcaps(t_term *term);
 int error(char *err_mess, int err_code);

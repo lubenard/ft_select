@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:35 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/24 19:14:45 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/26 12:54:34 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,21 @@
 #include <curses.h>
 #include <term.h>
 
-int init_structs(t_select **select)
+t_select *ft_select;
+
+int init_structs(void)
 {
-	if (!(*select = malloc(sizeof(t_select))))
+	if (!(ft_select = malloc(sizeof(t_select))))
 		return (error("error during malloc", ERR_MALLOC));
-	if (!((*select)->term = malloc(sizeof(t_term))))
+	if (!(ft_select->term = malloc(sizeof(t_term))))
 	{
-		ft_memdel((void **)select);
+		ft_memdel((void **)ft_select);
 		return (error("error during malloc", ERR_MALLOC));
 	}
-	if (!((*select)->list = malloc(sizeof(t_list_hand))))
+	if (!(ft_select->list = malloc(sizeof(t_list_hand))))
 	{
-		ft_memdel((void **)&(*select)->term);
-		ft_memdel((void **)select);
+		ft_memdel((void **)ft_select->term);
+		ft_memdel((void **)ft_select);
 		return (error("error during malloc on t_list struct", ERR_MALLOC));
 	}
 	return (0);
@@ -75,7 +77,7 @@ void print_list(t_select *select)
 	t_node *tmp;
 	size_t i;
 
-	tputs (select->term->clear, 1, ft_putchar_input);
+	tputs (ft_select->term->clear, 1, ft_putchar_input);
 	tmp = select->list->head;
 	i = 0;
 	while (tmp)
@@ -99,25 +101,24 @@ void print_list(t_select *select)
 int main(int argc, char **argv)
 {
 	int			ret_code;
-	t_select	*select;
 
 	ret_code = 0;
 	if (!isatty(0))
 		return (error("input/output error, are fds open ?", ERR_TTY));
 	else if (argc == 1)
-		return (error("Usage: ./ft_select args1 args2 args3...", ERR_USAGE));
-	if ((ret_code = init_structs(&select)))
+		return (error("Usage: ./ft_ft_select args1 args2 args3...", ERR_USAGE));
+	if ((ret_code = init_structs()))
 		return (ret_code);
-	if ((ret_code = init_termcaps(select->term)))
+	if ((ret_code = init_termcaps(ft_select->term)))
 		return (ret_code);
-	if ((ret_code = parsing(select->list, argv)))
+	if ((ret_code = parsing(ft_select->list, argv)))
 		return (ret_code);
-	select->list->biggest_len = compute_biggest_lenght(select->list->head);
-	if (!(select->list->nbr_elem = (select->term->col /
-	select->list->biggest_len)))
+	ft_select->list->biggest_len = compute_biggest_lenght(ft_select->list->head);
+	if (!(ft_select->list->nbr_elem = (ft_select->term->col /
+	ft_select->list->biggest_len)))
 		return (1);
-	//handle_signals();
-	print_list(select);
-	read_input(select);
+	handle_signals();
+	print_list(ft_select);
+	read_input(ft_select);
 	return (0);
 }

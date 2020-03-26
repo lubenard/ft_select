@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 22:48:46 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/24 15:30:10 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/26 10:30:00 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int manage_keys(t_select *select, char key[3])
 
 	sum = key[0] + key[1] + key[2];
 	//ft_printf("%d %d %d, sum = %zu\n", key[0], key[1], key[2], sum);
-	if (sum >= 183 || sum <= 186)
+	if (sum >= 183 && sum <= 186)
 		move_key(select, sum);
 	else if (sum == 32)
 	{
