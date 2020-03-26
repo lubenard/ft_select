@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/24 18:34:21 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/26 14:48:34 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/26 16:18:40 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,22 @@ void handle_sigint(int signal)
 	ft_exit(ft_select);
 }
 
+void handle_resize(int signal)
+{
+	(void)signal;
+	struct winsize w;
+	ioctl(STDIN_FILENO, TIOCGWINSZ, &w);
+	ft_select->term->col = w.ws_col;
+	ft_select->term->line = w.ws_row;
+	if (!(ft_select->list->nbr_elem = (ft_select->term->col /
+	ft_select->list->biggest_len) - 1))
+	{
+		error("error: term size too small", ERR_TERM_SIZE);
+		ft_exit(ft_select);
+	}
+	print_list(ft_select);
+}
+
 /*
 ** Define all signals and attributewhat to do
 */
@@ -73,4 +89,5 @@ void handle_signals(void)
 	signal(SIGKILL, handle_sigint);
 	signal(SIGQUIT, handle_sigint);
 	signal(SIGABRT, handle_sigint);
+	signal(SIGWINCH, handle_resize);
 }

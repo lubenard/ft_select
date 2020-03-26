@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/26 14:47:00 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/26 16:03:47 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 */
 
 enum {ERR_USAGE, ERR_TTY, ERR_TERM, ERR_MALLOC, ERR_ARG_NOT_ASCII,
-	ERR_TCGETATTR, ERR_TCSETATTR};
+	ERR_TCGETATTR, ERR_TCSETATTR, ERR_TERM_SIZE};
 
 /*
 ** Color Macro
@@ -74,6 +74,10 @@ typedef struct	s_node
 	struct s_node	*prev;
 }				t_node;
 
+/*
+** Handler of linked list
+*/
+
 typedef struct	s_list_hand
 {
 	t_node	*head;
@@ -101,26 +105,46 @@ typedef struct	s_select
 /*
 ** Move keys functions
 */
-void move_right(t_select *select);
-void move_left(t_select *select);
-void move_up(t_select *select);
-void move_down(t_select *select);
+
+void			manage_keys(t_select *select, char buffkey[3]);
+void			move_right(t_select *select);
+void			move_left(t_select *select);
+void			move_up(t_select *select);
+void			move_down(t_select *select);
 
 /*
 ** Handle signal
 */
 
-void handle_signals(void);
+void			handle_signals(void);
 
-int init_termcaps(t_term *term);
-int error(char *err_mess, int err_code);
-int parsing(t_list_hand* list, char **argv);
-void free_list(t_node *head);
-int ft_exit(t_select *select);
-int manage_keys(t_select *select, char buffkey[3]);
-void print_list(t_select *select);
-void check_file_exist(t_node *node);
-int return_choice(t_node *head);
+/*
+** Termcaps stuff
+*/
 
-int ft_putchar_input(int c);
+int				init_termcaps(t_term *term);
+
+/*
+** Parsing
+*/
+
+int				parsing(t_list_hand* list, char **argv);
+
+/*
+** Printing functions
+*/
+
+void			print_list(t_select *select);
+int				return_choice(t_node *head);
+int				error(char *err_mess, int err_code);
+int				ft_putchar_input(int c);
+
+/*
+** Other
+*/
+
+int				ft_exit(t_select *select);
+void			check_file_exist(t_node *node);
+void			free_list(t_node *head);
+
 #endif

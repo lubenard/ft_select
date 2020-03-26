@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 22:48:46 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/26 10:30:00 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/26 16:06:06 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ int	ft_exit(t_select *select)
 {
 	char *ve;
 
-	ft_dprintf(0, "Exiting ft_select...\n");
+	ft_dprintf(0, "\nExiting ft_select...\n");
 	if (tcsetattr(0, TCSANOW, &select->term->old_terms))
-		return (error("Cannot restaure old terms !", ERR_TCSETATTR));
+		exit(error("Cannot restaure old terms !", ERR_TCSETATTR));
 	ve = tgetstr("ve", NULL);
 	tputs(ve, 1, ft_putchar_input);
 	free_list(select->list->head);
 	ft_memdel((void *)&select->list);
 	ft_memdel((void *)&select->term);
 	ft_memdel((void *)&select);
-	exit (0);
+	exit(0);
 }
 
 void delete_entry(t_select *select)
@@ -85,7 +85,7 @@ void move_key(t_select *select, int move)
 ** 126    126      0        0       key suppr
 */
 
-int manage_keys(t_select *select, char key[3])
+void manage_keys(t_select *select, char key[3])
 {
 	size_t sum;
 
@@ -106,5 +106,4 @@ int manage_keys(t_select *select, char key[3])
 	}
 	else if (sum == 127 || sum == 126)
 		delete_entry(select);
-	return (0);
 }

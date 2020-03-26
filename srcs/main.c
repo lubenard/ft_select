@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:35 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/26 12:54:34 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/26 16:12:10 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void print_list(t_select *select)
 		}
 		tmp = tmp->next;
 	}
-	write(0, "\n", 1);
 }
 
 int main(int argc, char **argv)
@@ -115,7 +114,7 @@ int main(int argc, char **argv)
 		return (ret_code);
 	ft_select->list->biggest_len = compute_biggest_lenght(ft_select->list->head);
 	if (!(ft_select->list->nbr_elem = (ft_select->term->col /
-	ft_select->list->biggest_len)))
+	ft_select->list->biggest_len) - 1))
 		return (1);
 	handle_signals();
 	print_list(ft_select);
