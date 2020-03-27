@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 15:46:36 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/27 10:41:12 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/27 15:32:06 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include "ft_select.h"
 
-void	get_data_termcaps(t_term *term)
+static void	get_data_termcaps(t_term *term)
 {
 	char *civis;
 
@@ -31,7 +31,7 @@ void	get_data_termcaps(t_term *term)
 ** Init termcaps and get size of terminal
 */
 
-int		init_termcaps(t_term *term)
+int			init_termcaps(t_term *term)
 {
 	char	*term_type;
 	int		ret;

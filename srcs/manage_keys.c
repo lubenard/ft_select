@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 22:48:46 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/27 13:42:25 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/27 15:26:16 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	ft_exit(t_select *select)
 	char *ve;
 
 	ft_putstr_fd(tgetstr("te", NULL), STDIN_FILENO);
-	ft_dprintf(0, "Exiting ft_select...\n");
-	if (tcsetattr(0, TCSANOW, &select->term->old_terms))
+	ft_dprintf(STDIN_FILENO, "Exiting ft_select...\n");
+	if (tcsetattr(STDIN_FILENO, TCSANOW, &select->term->old_terms))
 		exit(error("Cannot restaure old terms !", ERR_TCSETATTR));
 	ve = tgetstr("ve", NULL);
 	tputs(ve, 1, ft_putchar_input);
@@ -38,7 +38,7 @@ int	ft_exit(t_select *select)
 	ft_memdel((void *)&select->term);
 	//ft_strdel(&select->research);
 	ft_memdel((void *)&select);
-		exit(0);
+	exit(0);
 }
 
 void delete_entry(t_select *select)
@@ -86,7 +86,7 @@ int delete_research(t_select *select)
 int delete_char_research(t_select *select)
 {
 	select->research[ft_strlen(select->research) - 1] = '\0';
-	print_search(select);
+	print_list(select);
 	return (0);
 }
 

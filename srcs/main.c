@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:35 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/27 01:24:11 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/27 14:32:32 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ int init_structs(void)
 		ft_memdel((void **)ft_select);
 		return (error("error during malloc on t_list struct", ERR_MALLOC));
 	}
-	if (!(ft_select->research = malloc(sizeof(t_list_hand))))
+	if (!(ft_select->research = malloc(sizeof(char))))
 	{
 		ft_memdel((void **)ft_select->term);
+		ft_memdel((void **)ft_select->list);
 		ft_memdel((void **)ft_select);
 		return (error("error during malloc on t_list struct", ERR_MALLOC));
 	}
@@ -59,56 +60,6 @@ void read_input(t_select *select)
 		else
 			manage_keys(select, buffkey);
 	}
-}
-
-size_t compute_biggest_lenght(t_node *head)
-{
-	size_t len;
-
-	len = 0;
-	while (head)
-	{
-		if (head->len > len)
-			len = head->len;
-		head = head->next;
-	}
-	return (len);
-}
-
-int ft_putchar_input(int c)
-{
-	write(0, &c, 1);
-	return (0);
-}
-
-void print_list(t_select *select)
-{
-	t_node *tmp;
-	size_t i;
-
-	tputs (ft_select->term->clear, 1, ft_putchar_input);
-	tmp = select->list->head;
-	i = 0;
-	if (select->research && !ft_strcmp(select->research, ""))
-	{
-		while (tmp)
-		{
-				ft_dprintf(0,"%s%s%s%s%s%-*s",tmp->color,
-				(tmp->is_select) ? FT_FILLED : "",
-				(select->list->cursor == tmp) ? FT_UNDER : "",
-				tmp->value,FT_EOC,select->list->biggest_len -
-				ft_strlen(tmp->value) + 1, "");
-				i++;
-				if (i == select->list->nbr_elem)
-				{
-					write(0, "\n\n", 2);
-					i = 0;
-				}
-			tmp = tmp->next;
-		}
-	}
-	else
-		print_search(select);
 }
 
 int main(int argc, char **argv)

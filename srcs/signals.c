@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/24 18:34:21 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/26 16:18:40 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/27 15:31:05 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ extern t_select *ft_select;
 ** Restauring old termcaps + make the cursor visible again
 */
 
-void handle_sigtstp(int sig)
+static void handle_sigtstp(int sig)
 {
 	char *ve;
 
@@ -44,7 +44,7 @@ void handle_sigtstp(int sig)
 ** Remodify termcaps + make the cursor invisible again
 */
 
-void handle_sigcont(int signal)
+static void handle_sigcont(int signal)
 {
 	(void)signal;
 	init_termcaps(ft_select->term);
@@ -55,16 +55,17 @@ void handle_sigcont(int signal)
 ** Handle CTRL-C
 */
 
-void handle_sigint(int signal)
+static void handle_sigint(int signal)
 {
 	(void)signal;
 	ft_exit(ft_select);
 }
 
-void handle_resize(int signal)
+static void handle_resize(int signal)
 {
-	(void)signal;
 	struct winsize w;
+
+	(void)signal;
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &w);
 	ft_select->term->col = w.ws_col;
 	ft_select->term->line = w.ws_row;

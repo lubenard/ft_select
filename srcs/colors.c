@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 12:27:40 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/27 09:44:25 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/27 15:31:39 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-char	*determine_color(char *value)
+static char	*determine_color(char *value)
 {
 	struct stat stat_struct;
 
