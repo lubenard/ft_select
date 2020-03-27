@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 22:48:46 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/26 18:17:09 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/27 01:23:02 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_exit(t_select *select)
 	free_list(select->list->head);
 	ft_memdel((void *)&select->list);
 	ft_memdel((void *)&select->term);
-	ft_strdel(&select->research);
+	//ft_strdel(&select->research);
 	ft_memdel((void *)&select);
 	exit(0);
 }
@@ -72,6 +72,23 @@ void move_key(t_select *select, int move)
 		move_right(select);
 }
 
+int delete_research(t_select *select)
+{
+	ft_strdel(&select->research);
+	if (!(select->research = malloc(sizeof(t_list_hand))))
+		return (error("error during malloc on t_list struct", ERR_MALLOC));
+	select->research = "";
+	print_list(select);
+	return (0);
+}
+
+int delete_char_research(t_select *select)
+{
+	select->research[ft_strlen(select->research) - 1] = '\0';
+	print_search(select);
+	return (0);
+}
+
 /*
 ** Manage keys codes:
 **
@@ -84,6 +101,8 @@ void move_key(t_select *select, int move)
 ** 10     10       0        0       key enter
 ** 127    127      0        0       key del
 ** 126    126      0        0       key suppr
+** 18     18       0        0       key ctrl + 'r'
+** 21     21       0        0       key ctrl + 'u'
 */
 
 void manage_keys(t_select *select, char key[3])
@@ -91,7 +110,6 @@ void manage_keys(t_select *select, char key[3])
 	size_t sum;
 
 	sum = key[0] + key[1] + key[2];
-	//ft_printf("%d %d %d, sum = %zu\n", key[0], key[1], key[2], sum);
 	if (sum >= 183 && sum <= 186)
 		move_key(select, sum);
 	else if (sum == 32)
@@ -107,4 +125,8 @@ void manage_keys(t_select *select, char key[3])
 	}
 	else if (sum == 127 || sum == 126)
 		delete_entry(select);
+	else if (sum == 18)
+		delete_char_research(select);
+	else if (sum == 21)
+		delete_research(select);
 }

@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:35 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/26 18:26:46 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/27 01:24:11 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void read_input(t_select *select)
 	{
 		ft_bzero(buffkey, 3);
 		ret_read = read(0, buffkey, 3);
-		if (ft_isprint(buffkey[0]))
+		if (ft_isprint(buffkey[0]) && buffkey[0] != 32)
 			research(select, buffkey[0]);
 		else if (buffkey[0] == 27 && !buffkey[1] && !buffkey[2])
 			ft_exit(select);
@@ -89,21 +89,26 @@ void print_list(t_select *select)
 	tputs (ft_select->term->clear, 1, ft_putchar_input);
 	tmp = select->list->head;
 	i = 0;
-	while (tmp)
+	if (select->research && !ft_strcmp(select->research, ""))
 	{
-		ft_dprintf(0,"%s%s%s%s%s%-*s",tmp->color,
-		(tmp->is_select) ? FT_FILLED : "",
-		(select->list->cursor == tmp) ? FT_UNDER : "",
-		tmp->value,FT_EOC,select->list->biggest_len -
-		ft_strlen(tmp->value) + 1, "");
-		i++;
-		if (i == select->list->nbr_elem)
+		while (tmp)
 		{
-			write(0, "\n\n", 2);
-			i = 0;
+				ft_dprintf(0,"%s%s%s%s%s%-*s",tmp->color,
+				(tmp->is_select) ? FT_FILLED : "",
+				(select->list->cursor == tmp) ? FT_UNDER : "",
+				tmp->value,FT_EOC,select->list->biggest_len -
+				ft_strlen(tmp->value) + 1, "");
+				i++;
+				if (i == select->list->nbr_elem)
+				{
+					write(0, "\n\n", 2);
+					i = 0;
+				}
+			tmp = tmp->next;
 		}
-		tmp = tmp->next;
 	}
+	else
+		print_search(select);
 }
 
 int main(int argc, char **argv)

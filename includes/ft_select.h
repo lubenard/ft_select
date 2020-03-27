@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/26 18:04:43 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/27 01:12:50 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,12 +141,18 @@ int				error(char *err_mess, int err_code);
 int				ft_putchar_input(int c);
 
 /*
+** Reasearch functions
+*/
+
+int				research(t_select *select, char buffkey);
+int				print_search(t_select *select);
+
+/*
 ** Other
 */
 
 int				ft_exit(t_select *select);
 void			check_file_exist(t_node *node);
 void			free_list(t_node *head);
-int				research(t_select *select, char buffkey);
 
 #endif
