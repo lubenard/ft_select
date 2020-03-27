@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 15:46:36 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/26 16:04:06 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/27 10:41:12 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	get_data_termcaps(t_term *term)
 	term->col = tgetnum("co");
 	term->line = tgetnum("li");
 	term->clear = tgetstr("cl", NULL);
+	ft_putstr_fd(tgetstr("ti", NULL), STDIN_FILENO);
 	civis = tgetstr("vi", NULL);
 	tputs(civis, 1, ft_putchar_input);
 }

@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 22:48:46 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/27 01:23:02 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/27 13:42:25 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	ft_exit(t_select *select)
 {
 	char *ve;
 
-	ft_dprintf(0, "\nExiting ft_select...\n");
+	ft_putstr_fd(tgetstr("te", NULL), STDIN_FILENO);
+	ft_dprintf(0, "Exiting ft_select...\n");
 	if (tcsetattr(0, TCSANOW, &select->term->old_terms))
 		exit(error("Cannot restaure old terms !", ERR_TCSETATTR));
 	ve = tgetstr("ve", NULL);
@@ -37,7 +38,7 @@ int	ft_exit(t_select *select)
 	ft_memdel((void *)&select->term);
 	//ft_strdel(&select->research);
 	ft_memdel((void *)&select);
-	exit(0);
+		exit(0);
 }
 
 void delete_entry(t_select *select)
