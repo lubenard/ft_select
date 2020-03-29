@@ -6,15 +6,12 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:35 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/27 14:32:32 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/29 17:32:38 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "ft_select.h"
-
-#include <curses.h>
-#include <term.h>
 
 t_select *ft_select;
 
@@ -38,7 +35,7 @@ int init_structs(void)
 		ft_memdel((void **)ft_select->term);
 		ft_memdel((void **)ft_select->list);
 		ft_memdel((void **)ft_select);
-		return (error("error during malloc on t_list struct", ERR_MALLOC));
+		return (error("error during malloc on research", ERR_MALLOC));
 	}
 	ft_select->research = "";
 	return (0);
