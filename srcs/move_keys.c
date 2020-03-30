@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/24 15:19:03 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 13:50:03 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 13:58:40 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	move_left(t_select *select)
 void	move_up(t_select *select)
 {
 	size_t i;
+
 	i = 0;
 	while (i != select->list->nbr_elem)
 	{

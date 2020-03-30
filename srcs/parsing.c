@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 11:07:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 13:47:16 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 14:14:32 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,20 @@ t_node		*new_node(t_node *last, char *arg, size_t index)
 	return (node);
 }
 
+void		detect_sort_opt(char **argv, int *i, short *sort)
+{
+	if (!ft_strcmp(argv[*i], "--sort"))
+	{
+		(*sort)++;
+		(*i)++;
+	}
+}
+
 int			parsing(t_list_hand *list, char **argv)
 {
 	int			i;
 	t_node		*node;
-	size_t		sort;
+	short		sort;
 
 	i = 1;
 	sort = 0;
@@ -91,11 +100,7 @@ int			parsing(t_list_hand *list, char **argv)
 	{
 		if (!ft_strisascii(argv[i]))
 			return (error("argument is not ascii", ERR_ARG_NOT_ASCII));
-		if (!ft_strcmp(argv[i], "--sort"))
-		{
-			sort++;
-			i++;
-		}
+		detect_sort_opt(argv, &i, &sort);
 		if (!(node = new_node(list->last, argv[i], i)))
 			return (error("error during malloc on node", ERR_MALLOC));
 		if (!list->last)

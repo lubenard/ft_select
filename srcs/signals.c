@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/24 18:34:21 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 13:54:45 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 14:02:05 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <term.h>
 #include <sys/ioctl.h>
 
-extern t_select *ft_select;
+extern t_select *g_select;
 
 /*
 ** Handle CTRL-Z (jobcontrol)
@@ -27,9 +27,9 @@ extern t_select *ft_select;
 static void	handle_sigtstp(int sig)
 {
 	(void)sig;
-	if (tcsetattr(0, TCSANOW, &ft_select->term->old_terms))
+	if (tcsetattr(0, TCSANOW, &g_select->term->old_terms))
 		return ;
-	tputs(ft_select->term->civis, 1, ft_putchar_input);
+	tputs(g_select->term->civis, 1, ft_putchar_input);
 	ioctl(STDERR_FILENO, TIOCSTI, "\x1A");
 	signal(SIGTSTP, SIG_DFL);
 }
@@ -44,8 +44,8 @@ static void	handle_sigtstp(int sig)
 static void	handle_sigcont(int signal)
 {
 	(void)signal;
-	init_termcaps(ft_select->term);
-	print_list(ft_select);
+	init_termcaps(g_select->term);
+	print_list(g_select);
 }
 
 /*
@@ -55,7 +55,7 @@ static void	handle_sigcont(int signal)
 static void	handle_sigint(int signal)
 {
 	(void)signal;
-	ft_exit(ft_select);
+	ft_exit(g_select);
 }
 
 static void	handle_resize(int signal)
@@ -64,12 +64,12 @@ static void	handle_resize(int signal)
 
 	(void)signal;
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &w);
-	ft_select->term->col = w.ws_col;
-	ft_select->term->line = w.ws_row;
-	if (!(ft_select->list->nbr_elem = (ft_select->term->col /
-	ft_select->list->biggest_len) - 1))
+	g_select->term->col = w.ws_col;
+	g_select->term->line = w.ws_row;
+	if (!(g_select->list->nbr_elem = (g_select->term->col /
+	g_select->list->biggest_len) - 1))
 		error("error: term size too small", ERR_TERM_SIZE);
-	print_list(ft_select);
+	print_list(g_select);
 }
 
 /*
