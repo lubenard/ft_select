@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/24 18:34:21 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/27 15:31:05 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 09:00:05 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,7 @@ static void handle_resize(int signal)
 	ft_select->term->line = w.ws_row;
 	if (!(ft_select->list->nbr_elem = (ft_select->term->col /
 	ft_select->list->biggest_len) - 1))
-	{
 		error("error: term size too small", ERR_TERM_SIZE);
-		ft_exit(ft_select);
-	}
 	print_list(ft_select);
 }
 

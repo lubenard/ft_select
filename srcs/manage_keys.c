@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 22:48:46 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/29 17:33:09 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 08:52:46 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	ft_exit(t_select *select)
 	ve = tgetstr("ve", NULL);
 	tputs(ve, 1, ft_putchar_input);
 	free_list(select->list->head);
+	ft_strdel(&select->research);
 	ft_memdel((void *)&select->list);
 	ft_memdel((void *)&select->term);
 	ft_memdel((void *)&select);

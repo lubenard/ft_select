@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:35 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/29 17:32:38 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 09:05:52 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ t_select *ft_select;
 int init_structs(void)
 {
 	if (!(ft_select = malloc(sizeof(t_select))))
-		return (error("error during malloc", ERR_MALLOC));
+		return (error("error during malloc on main structure", ERR_MALLOC));
 	if (!(ft_select->term = malloc(sizeof(t_term))))
 	{
 		ft_memdel((void **)ft_select);
-		return (error("error during malloc", ERR_MALLOC));
+		return (error("error during malloc on term structure", ERR_MALLOC));
 	}
 	if (!(ft_select->list = malloc(sizeof(t_list_hand))))
 	{
@@ -30,14 +30,13 @@ int init_structs(void)
 		ft_memdel((void **)ft_select);
 		return (error("error during malloc on t_list struct", ERR_MALLOC));
 	}
-	if (!(ft_select->research = malloc(sizeof(char))))
+	if (!(ft_select->research = ft_strdup("")))
 	{
 		ft_memdel((void **)ft_select->term);
 		ft_memdel((void **)ft_select->list);
 		ft_memdel((void **)ft_select);
 		return (error("error during malloc on research", ERR_MALLOC));
 	}
-	ft_select->research = "";
 	return (0);
 }
 
