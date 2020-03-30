@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 11:59:02 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 13:09:09 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct	s_term
 	int		col;
 	int		line;
 	char	*clear;
+	char	*term_end;
+	char	*civis;
 	struct termios terms;
 	struct termios old_terms;
 }				t_term;

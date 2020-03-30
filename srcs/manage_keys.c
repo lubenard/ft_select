@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 22:48:46 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 09:40:38 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 13:38:52 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,14 @@
 
 int	ft_exit(t_select *select)
 {
-	char *ve;
-
-	ft_putstr_fd(tgetstr("te", NULL), STDIN_FILENO);
-	ft_dprintf(STDIN_FILENO, "Exiting ft_select...\n");
-	if (tcsetattr(STDIN_FILENO, TCSANOW, &select->term->old_terms))
-		exit(error("Cannot restaure old terms !", ERR_TCSETATTR));
-	ve = tgetstr("ve", NULL);
-	tputs(ve, 1, ft_putchar_input);
 	free_list(select->list->head);
 	ft_strdel(&select->research);
 	ft_memdel((void *)&select->list);
+	tputs(select->term->term_end,1, ft_putchar_input);
+	tputs(select->term->civis, 1, ft_putchar_input);
+	ft_dprintf(STDIN_FILENO, "Exiting ft_select...\n");
+	if (tcsetattr(STDIN_FILENO, TCSANOW, &select->term->old_terms))
+		error("Cannot restaure old terms !", ERR_TCSETATTR);
 	ft_memdel((void *)&select->term);
 	ft_memdel((void *)&select);
 	exit(0);

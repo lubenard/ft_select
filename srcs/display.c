@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 14:29:43 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 09:35:28 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 12:20:03 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		print_list(t_select *select)
 	tputs (select->term->clear, 1, ft_putchar_input);
 	tmp = select->list->head;
 	i = 0;
-	if (select->research && !ft_strcmp(select->research, ""))
+	if (!ft_strcmp(select->research, ""))
 	{
 		while (tmp)
 		{
@@ -62,7 +62,7 @@ void		print_list(t_select *select)
 			tmp = tmp->next;
 		}
 	}
-	else if (select->research)
+	else
 		print_search(select);
 	if (ft_strcmp(select->research, ""))
 		ft_dprintf(0, "\n\nResearch field: %s\n", select->research);

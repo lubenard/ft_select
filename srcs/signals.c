@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/24 18:34:21 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 09:00:05 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 13:38:14 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,10 @@ extern t_select *ft_select;
 
 static void handle_sigtstp(int sig)
 {
-	char *ve;
-
 	(void)sig;
 	if (tcsetattr(0, TCSANOW, &ft_select->term->old_terms))
 		return ;
-	ve = tgetstr("ve", NULL);
-	tputs(ve, 1, ft_putchar_input);
+	tputs(ft_select->term->civis, 1, ft_putchar_input);
 	ioctl(STDERR_FILENO, TIOCSTI, "\x1A");
 	signal(SIGTSTP, SIG_DFL);
 }
