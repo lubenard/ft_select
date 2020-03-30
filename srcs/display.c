@@ -6,14 +6,14 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 14:29:43 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/29 17:23:15 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 09:35:28 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <term.h>
 
-static void print_elem(t_select *select, t_node *tmp, size_t *i)
+static void	print_elem(t_select *select, t_node *tmp, size_t *i)
 {
 	ft_dprintf(0,"%s%s%s%s%s%-*s",tmp->color,
 	(tmp->is_select) ? FT_FILLED : "",
@@ -23,12 +23,12 @@ static void print_elem(t_select *select, t_node *tmp, size_t *i)
 	(*i)++;
 	if (*i == select->list->nbr_elem)
 	{
-		write(0, "\n\n", 2);
+		write(STDIN_FILENO, "\n\n", 2);
 		*i = 0;
 	}
 }
 
-static int print_search(t_select *select)
+static int	print_search(t_select *select)
 {
 	t_node	*tmp;
 	size_t	i;
@@ -46,7 +46,7 @@ static int print_search(t_select *select)
 	return (0);
 }
 
-void print_list(t_select *select)
+void		print_list(t_select *select)
 {
 	t_node *tmp;
 	size_t i;
@@ -64,4 +64,6 @@ void print_list(t_select *select)
 	}
 	else if (select->research)
 		print_search(select);
+	if (ft_strcmp(select->research, ""))
+		ft_dprintf(0, "\n\nResearch field: %s\n", select->research);
 }

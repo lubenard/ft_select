@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 22:48:46 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 08:52:46 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 09:40:38 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ int	ft_exit(t_select *select)
 	exit(0);
 }
 
+/*
+** Delete entry from the list
+*/
+
 void delete_entry(t_select *select)
 {
 	t_node *tmp;
@@ -71,23 +75,6 @@ void move_key(t_select *select, int move)
 		move_left(select);
 	else if (move == RIGHT)
 		move_right(select);
-}
-
-int delete_research(t_select *select)
-{
-	ft_strdel(&select->research);
-	if (!(select->research = malloc(sizeof(t_list_hand))))
-		return (error("error during malloc on t_list struct", ERR_MALLOC));
-	select->research = "";
-	print_list(select);
-	return (0);
-}
-
-int delete_char_research(t_select *select)
-{
-	select->research[ft_strlen(select->research) - 1] = '\0';
-	print_list(select);
-	return (0);
 }
 
 /*

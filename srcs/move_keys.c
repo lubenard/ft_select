@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/24 15:19:03 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/24 18:21:21 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 12:16:34 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,33 @@
 
 void move_right(t_select *select)
 {
-	select->list->cursor = (select->list->cursor->next) ?
+	t_node *tmp;
+
+	if (!ft_strcmp(select->research, ""))
+		select->list->cursor = (select->list->cursor->next) ?
 		select->list->cursor->next : select->list->head;
+	else
+	{
+		tmp = (select->list->cursor->next) ?
+		select->list->cursor->next : select->list->head;
+		set_cursor_on(select, tmp, NEXT);
+	}
 	print_list(select);
 }
 
 void move_left(t_select *select)
 {
-	select->list->cursor = (select->list->cursor->prev) ?
+	t_node *tmp;
+
+	if (!ft_strcmp(select->research, ""))
+		select->list->cursor = (select->list->cursor->prev) ?
 		select->list->cursor->prev : select->list->last;
+	else
+	{
+		tmp = (select->list->cursor->prev) ?
+		select->list->cursor->prev : select->list->last;
+		set_cursor_on(select, tmp, PREV);
+	}
 	print_list(select);
 }
 

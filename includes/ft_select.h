@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/27 15:23:08 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 11:59:02 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,21 @@ enum {ERR_USAGE, ERR_TTY, ERR_TERM, ERR_MALLOC, ERR_ARG_NOT_ASCII,
 # define FT_UNDER		"\033[4m"
 # define FT_FILLED		"\033[7m"
 
+/*
+** Define for key directions
+*/
+
 # define UP				183
 # define DOWN			184
 # define LEFT			186
 # define RIGHT			185
+
+/*
+** Define for set_cursor_on direction
+*/
+
+# define NEXT			1
+# define PREV			2
 
 /*
 ** Termcaps structure
@@ -145,6 +156,9 @@ int				ft_putchar_input(int c);
 */
 
 int				research(t_select *select, char buffkey);
+void			delete_char_research(t_select *select);
+int				delete_research(t_select *select);
+void			set_cursor_on(t_select *select, t_node *tmp, size_t sens);
 
 /*
 ** Other

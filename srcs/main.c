@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:35 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 09:05:52 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 09:27:04 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 t_select *ft_select;
 
-int init_structs(void)
+static int	init_structs(void)
 {
 	if (!(ft_select = malloc(sizeof(t_select))))
 		return (error("error during malloc on main structure", ERR_MALLOC));
@@ -40,7 +40,7 @@ int init_structs(void)
 	return (0);
 }
 
-void read_input(t_select *select)
+static void	read_input(t_select *select)
 {
 	ssize_t	ret_read;
 	char	buffkey[3];
@@ -58,7 +58,7 @@ void read_input(t_select *select)
 	}
 }
 
-int main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	int			ret_code;
 
