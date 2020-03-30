@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/24 18:34:21 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 13:38:14 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 13:54:45 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ extern t_select *ft_select;
 ** Restauring old termcaps + make the cursor visible again
 */
 
-static void handle_sigtstp(int sig)
+static void	handle_sigtstp(int sig)
 {
 	(void)sig;
 	if (tcsetattr(0, TCSANOW, &ft_select->term->old_terms))
@@ -41,7 +41,7 @@ static void handle_sigtstp(int sig)
 ** Remodify termcaps + make the cursor invisible again
 */
 
-static void handle_sigcont(int signal)
+static void	handle_sigcont(int signal)
 {
 	(void)signal;
 	init_termcaps(ft_select->term);
@@ -52,13 +52,13 @@ static void handle_sigcont(int signal)
 ** Handle CTRL-C
 */
 
-static void handle_sigint(int signal)
+static void	handle_sigint(int signal)
 {
 	(void)signal;
 	ft_exit(ft_select);
 }
 
-static void handle_resize(int signal)
+static void	handle_resize(int signal)
 {
 	struct winsize w;
 
@@ -76,7 +76,7 @@ static void handle_resize(int signal)
 ** Define all signals and attributewhat to do
 */
 
-void handle_signals(void)
+void		handle_signals(void)
 {
 	signal(SIGINT, handle_sigint);
 	signal(SIGCONT, handle_sigcont);

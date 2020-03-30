@@ -6,13 +6,13 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 11:06:02 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/27 14:31:33 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 13:54:03 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-int return_choice(t_node *head)
+int		return_choice(t_node *head)
 {
 	t_node	*tmp;
 
@@ -29,7 +29,7 @@ int return_choice(t_node *head)
 	return (0);
 }
 
-void free_list(t_node *head)
+void	free_list(t_node *head)
 {
 	t_node	*tmp;
 
@@ -41,7 +41,7 @@ void free_list(t_node *head)
 	}
 }
 
-size_t compute_biggest_lenght(t_node *head)
+size_t	compute_biggest_lenght(t_node *head)
 {
 	size_t len;
 
@@ -55,7 +55,7 @@ size_t compute_biggest_lenght(t_node *head)
 	return (len);
 }
 
-int ft_putchar_input(int c)
+int		ft_putchar_input(int c)
 {
 	write(0, &c, 1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 14:29:43 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 12:20:03 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 13:47:57 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 static void	print_elem(t_select *select, t_node *tmp, size_t *i)
 {
-	ft_dprintf(0,"%s%s%s%s%s%-*s",tmp->color,
+	ft_dprintf(0, "%s%s%s%s%s%-*s", tmp->color,
 	(tmp->is_select) ? FT_FILLED : "",
 	(select->list->cursor == tmp) ? FT_UNDER : "",
-	tmp->value,FT_EOC,select->list->biggest_len -
+	tmp->value, FT_EOC, select->list->biggest_len -
 	ft_strlen(tmp->value) + 1, "");
 	(*i)++;
 	if (*i == select->list->nbr_elem)
@@ -51,7 +51,7 @@ void		print_list(t_select *select)
 	t_node *tmp;
 	size_t i;
 
-	tputs (select->term->clear, 1, ft_putchar_input);
+	tputs(select->term->clear, 1, ft_putchar_input);
 	tmp = select->list->head;
 	i = 0;
 	if (!ft_strcmp(select->research, ""))

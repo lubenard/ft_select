@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 22:48:46 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 13:38:52 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 13:49:37 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@
 ** Finally, clear memory
 */
 
-int	ft_exit(t_select *select)
+int		ft_exit(t_select *select)
 {
 	free_list(select->list->head);
 	ft_strdel(&select->research);
 	ft_memdel((void *)&select->list);
-	tputs(select->term->term_end,1, ft_putchar_input);
+	tputs(select->term->term_end, 1, ft_putchar_input);
 	tputs(select->term->civis, 1, ft_putchar_input);
 	ft_dprintf(STDIN_FILENO, "Exiting ft_select...\n");
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &select->term->old_terms))
@@ -42,7 +42,7 @@ int	ft_exit(t_select *select)
 ** Delete entry from the list
 */
 
-void delete_entry(t_select *select)
+void	delete_entry(t_select *select)
 {
 	t_node *tmp;
 
@@ -62,7 +62,7 @@ void delete_entry(t_select *select)
 	select->list->size--;
 }
 
-void move_key(t_select *select, int move)
+void	move_key(t_select *select, int move)
 {
 	if (move == UP)
 		move_up(select);
@@ -90,7 +90,7 @@ void move_key(t_select *select, int move)
 ** 21     21       0        0       key ctrl + 'u'
 */
 
-void manage_keys(t_select *select, char key[3])
+void	manage_keys(t_select *select, char key[3])
 {
 	size_t sum;
 

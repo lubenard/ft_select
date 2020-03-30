@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 13:09:09 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 13:45:02 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ enum {ERR_USAGE, ERR_TTY, ERR_TERM, ERR_MALLOC, ERR_ARG_NOT_ASCII,
 
 typedef struct	s_term
 {
-	int		col;
-	int		line;
-	char	*clear;
-	char	*term_end;
-	char	*civis;
-	struct termios terms;
-	struct termios old_terms;
+	int				col;
+	int				line;
+	char			*clear;
+	char			*term_end;
+	char			*civis;
+	struct termios	terms;
+	struct termios	old_terms;
 }				t_term;
 
 /*
@@ -142,7 +142,7 @@ int				init_termcaps(t_term *term);
 ** Parsing
 */
 
-int				parsing(t_list_hand* list, char **argv);
+int				parsing(t_list_hand *list, char **argv);
 
 /*
 ** Printing functions

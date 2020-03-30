@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 12:27:40 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 09:27:13 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 13:55:22 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void		check_file_exist(t_node *node)
 {
 	if (!access(node->value, F_OK))
 		ft_strcpy(node->color, determine_color(node->value));
-	else if (!ft_strcmp(node->value , "blue_pill"))
+	else if (!ft_strcmp(node->value, "blue_pill"))
 		ft_strcpy(node->color, FT_BLUE);
-	else if (!ft_strcmp(node->value , "red_pill"))
+	else if (!ft_strcmp(node->value, "red_pill"))
 		ft_strcpy(node->color, FT_RED);
 	else
 		ft_strcpy(node->color, FT_CYAN);

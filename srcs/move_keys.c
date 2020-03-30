@@ -6,13 +6,13 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/24 15:19:03 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 12:16:34 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 13:50:03 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void move_right(t_select *select)
+void	move_right(t_select *select)
 {
 	t_node *tmp;
 
@@ -28,7 +28,7 @@ void move_right(t_select *select)
 	print_list(select);
 }
 
-void move_left(t_select *select)
+void	move_left(t_select *select)
 {
 	t_node *tmp;
 
@@ -44,7 +44,7 @@ void move_left(t_select *select)
 	print_list(select);
 }
 
-void move_up(t_select *select)
+void	move_up(t_select *select)
 {
 	size_t i;
 	i = 0;
@@ -57,7 +57,7 @@ void move_up(t_select *select)
 	print_list(select);
 }
 
-void move_down(t_select *select)
+void	move_down(t_select *select)
 {
 	size_t i;
 

@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 17:32:49 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 11:56:59 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 13:53:32 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Delete the current research
 */
 
-int delete_research(t_select *select)
+int		delete_research(t_select *select)
 {
 	ft_strdel(&select->research);
 	if (!(select->research = ft_strdup("")))
@@ -29,13 +29,13 @@ int delete_research(t_select *select)
 ** Delete the last character of the research field
 */
 
-void delete_char_research(t_select *select)
+void	delete_char_research(t_select *select)
 {
 	select->research[ft_strlen(select->research) - 1] = '\0';
 	print_list(select);
 }
 
-void set_cursor_on(t_select *select, t_node *tmp, size_t sens)
+void	set_cursor_on(t_select *select, t_node *tmp, size_t sens)
 {
 	while (tmp)
 	{
@@ -52,7 +52,7 @@ void set_cursor_on(t_select *select, t_node *tmp, size_t sens)
 	}
 }
 
-int research(t_select *select, char buffkey)
+int		research(t_select *select, char buffkey)
 {
 	char *research_tmp;
 

@@ -6,13 +6,13 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 11:07:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/29 16:58:17 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 13:47:16 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-static void		switch_elem(t_node *first, t_node *next)
+static void	switch_elem(t_node *first, t_node *next)
 {
 	if (next->prev)
 		next->prev->next = next->next;
@@ -25,7 +25,7 @@ static void		switch_elem(t_node *first, t_node *next)
 	first->prev = next;
 }
 
-void	sort_ascii(t_list_hand *list)
+void		sort_ascii(t_list_hand *list)
 {
 	t_node	*first;
 	t_node	*tmp;
@@ -56,7 +56,7 @@ void	sort_ascii(t_list_hand *list)
 ** Create new node to connect to linked list
 */
 
-t_node *new_node(t_node *last, char *arg, size_t index)
+t_node		*new_node(t_node *last, char *arg, size_t index)
 {
 	t_node *node;
 
@@ -78,7 +78,7 @@ t_node *new_node(t_node *last, char *arg, size_t index)
 	return (node);
 }
 
-int parsing(t_list_hand *list, char **argv)
+int			parsing(t_list_hand *list, char **argv)
 {
 	int			i;
 	t_node		*node;
