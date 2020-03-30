@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 15:46:36 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 13:38:02 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 15:58:59 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	get_data_termcaps(t_term *term)
 int			init_termcaps(t_term *term)
 {
 	char	*term_type;
-	int		ret;
+	short	ret;
 
 	if ((term_type = getenv("TERM")))
 		ret = tgetent(NULL, term_type);

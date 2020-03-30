@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:35 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 14:00:28 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/03/30 15:59:27 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	init_structs(void)
 
 static void	read_input(t_select *select)
 {
-	ssize_t	ret_read;
+	short	ret_read;
 	char	buffkey[3];
 
 	while (1)
