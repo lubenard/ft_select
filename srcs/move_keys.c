@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/24 15:19:03 by lubenard          #+#    #+#             */
-/*   Updated: 2020/04/02 07:50:13 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/04/02 08:08:28 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 void	move_right(t_select *select)
 {
 	t_node *tmp;
+	t_node *ref;
 
 	tmp = (select->list->cursor->next) ?
 	select->list->cursor->next : select->list->head;
+	ref = (tmp->prev) ? tmp->prev : select->list->last;
 	if (!ft_strcmp(select->research, ""))
 		select->list->cursor = tmp;
 	else
@@ -25,7 +27,7 @@ void	move_right(t_select *select)
 		while (tmp)
 		{
 			if (!ft_strncmp(select->research, tmp->value,
-			ft_strlen(select->research)))
+			ft_strlen(select->research)) || tmp == ref)
 			{
 				select->list->cursor = tmp;
 				break ;
@@ -39,9 +41,11 @@ void	move_right(t_select *select)
 void	move_left(t_select *select)
 {
 	t_node *tmp;
+	t_node *ref;
 
 	tmp = (select->list->cursor->prev) ?
 	select->list->cursor->prev : select->list->last;
+	ref = (tmp->next) ? tmp->next : select->list->head;
 	if (!ft_strcmp(select->research, ""))
 		select->list->cursor = tmp;
 	else
@@ -49,7 +53,7 @@ void	move_left(t_select *select)
 		while (tmp)
 		{
 			if (!ft_strncmp(select->research, tmp->value,
-			ft_strlen(select->research)))
+			ft_strlen(select->research)) || tmp == ref)
 			{
 				select->list->cursor = tmp;
 				break ;
