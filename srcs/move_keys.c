@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/24 15:19:03 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 13:58:40 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/04/02 07:50:13 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,22 @@ void	move_right(t_select *select)
 {
 	t_node *tmp;
 
+	tmp = (select->list->cursor->next) ?
+	select->list->cursor->next : select->list->head;
 	if (!ft_strcmp(select->research, ""))
-		select->list->cursor = (select->list->cursor->next) ?
-		select->list->cursor->next : select->list->head;
+		select->list->cursor = tmp;
 	else
 	{
-		tmp = (select->list->cursor->next) ?
-		select->list->cursor->next : select->list->head;
-		set_cursor_on(select, tmp, NEXT);
+		while (tmp)
+		{
+			if (!ft_strncmp(select->research, tmp->value,
+			ft_strlen(select->research)))
+			{
+				select->list->cursor = tmp;
+				break ;
+			}
+			tmp = (tmp->next) ? tmp->next : select->list->head;
+		}
 	}
 	print_list(select);
 }
@@ -32,14 +40,22 @@ void	move_left(t_select *select)
 {
 	t_node *tmp;
 
+	tmp = (select->list->cursor->prev) ?
+	select->list->cursor->prev : select->list->last;
 	if (!ft_strcmp(select->research, ""))
-		select->list->cursor = (select->list->cursor->prev) ?
-		select->list->cursor->prev : select->list->last;
+		select->list->cursor = tmp;
 	else
 	{
-		tmp = (select->list->cursor->prev) ?
-		select->list->cursor->prev : select->list->last;
-		set_cursor_on(select, tmp, PREV);
+		while (tmp)
+		{
+			if (!ft_strncmp(select->research, tmp->value,
+			ft_strlen(select->research)))
+			{
+				select->list->cursor = tmp;
+				break ;
+			}
+			tmp = (tmp->prev) ? tmp->prev : select->list->last;
+		}
 	}
 	print_list(select);
 }
