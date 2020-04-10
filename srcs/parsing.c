@@ -101,6 +101,8 @@ int			parsing(t_list_hand *list, char **argv)
 		if (!ft_strisascii(argv[i]))
 			return (error("argument is not ascii", ERR_ARG_NOT_ASCII));
 		detect_sort_opt(argv, &i, &sort);
+		if (!argv[i])
+			break ;
 		if (!(node = new_node(list->last, argv[i], i)))
 			return (error("error during malloc on node", ERR_MALLOC));
 		if (!list->last)
