@@ -49,7 +49,8 @@ static void	read_input(t_select *select)
 	{
 		ft_bzero(buffkey, 3);
 		ret_read = read(0, buffkey, 3);
-		if (ft_isprint(buffkey[0]) && buffkey[0] != 32)
+		if (ft_isprint(buffkey[0]) && buffkey[0] != 32
+		&& buffkey[0] != 126)
 			research(select, buffkey[0]);
 		else if (buffkey[0] == 27 && !buffkey[1] && !buffkey[2])
 			ft_exit(select);
