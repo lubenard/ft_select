@@ -131,7 +131,7 @@ void			move_down(t_select *select);
 */
 
 void			handle_signals(void);
-
+void			handle_resize(int signal);
 /*
 ** Termcaps stuff
 */

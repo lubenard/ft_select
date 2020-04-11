@@ -58,7 +58,11 @@ static void	handle_sigint(int signal)
 	ft_exit(g_select);
 }
 
-static void	handle_resize(int signal)
+/*
+** Handle Terminal resize
+*/
+
+void	handle_resize(int signal)
 {
 	struct winsize w;
 
@@ -67,8 +71,13 @@ static void	handle_resize(int signal)
 	g_select->term->col = w.ws_col;
 	g_select->term->line = w.ws_row;
 	if (!(g_select->list->nbr_elem = (g_select->term->col /
-	g_select->list->biggest_len) - 1))
-		error("error: term size too small", ERR_TERM_SIZE);
+	g_select->list->biggest_len)) || (int)(g_select->list->size /
+	g_select->list->nbr_elem) >= g_select->term->line)
+	{
+		tputs(g_select->term->clear, 1, ft_putchar_input);
+		error("term size too small", ERR_TERM_SIZE);
+		return ;
+	}
 	print_list(g_select);
 }
 

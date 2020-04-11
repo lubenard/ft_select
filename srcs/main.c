@@ -76,11 +76,8 @@ int			main(int argc, char **argv)
 		return (ret_code);
 	g_select->list->biggest_len =
 	compute_biggest_lenght(g_select->list->head);
-	if (!(g_select->list->nbr_elem = (g_select->term->col /
-	g_select->list->biggest_len) - 1))
-		return (1);
+	handle_resize(0);
 	handle_signals();
-	print_list(g_select);
 	read_input(g_select);
 	return (0);
 }
