@@ -23,20 +23,31 @@ arrow down             : cursor move down
 space                  : select the argument on the list
 return                 : return the list of arguments
 backspace / delete key : delete the argument the cursor is on
-ctrl-r                 : delete last character of research
-ctrl-u                 : delete the research
+ctrl-r                 : delete last character of research, but is overriden when adding element
+ctrl-u                 : delete the research, but is overriden when adding element
 ctrl-a                 : add new element to list
 ```
 
 ### Features
 
-CLI option: Ascii sort
+- #### CLI option: Ascii sort:
 
-```
---sort
+    ```
+    Usage : ./ft_select my options are the best --sort
+    ```
 
-Usage : ./ft_select my options are the best --sort
-```
+- #### Dynamic research : just type !
 
-Dynamic research : just type !
+- #### Add element to the list:
 
+      Type Ctrl + a. 
+
+      You can now type the name of the element you want to add to the list.
+
+      To remove a character, Ctrl + r remove the last character, and Ctrl + u clear the line.
+
+      Press Enter to validate the name.
+
+      If you want to hide the character adding temporarily, press Ctrl + a.
+
+      The line will not be cleared
