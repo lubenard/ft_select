@@ -23,7 +23,7 @@ static void	print_elem(t_select *select, t_node *tmp, size_t *i)
 	(*i)++;
 	if (*i == select->list->nbr_elem)
 	{
-		write(STDIN_FILENO, "\n", 2);
+		write(STDIN_FILENO, "\n", 1);
 		*i = 0;
 	}
 }
