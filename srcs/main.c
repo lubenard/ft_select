@@ -19,24 +19,28 @@ static int	init_structs(void)
 {
 	if (!(g_select = malloc(sizeof(t_select))))
 		return (error("error during malloc on main structure", ERR_MALLOC));
+	ft_bzero(g_select, sizeof(t_select));
 	if (!(g_select->term = malloc(sizeof(t_term))))
 	{
-		ft_memdel((void **)g_select);
+		free_structs(g_select);
 		return (error("error during malloc on term structure", ERR_MALLOC));
 	}
 	if (!(g_select->list = malloc(sizeof(t_list_hand))))
 	{
-		ft_memdel((void **)g_select->term);
-		ft_memdel((void **)g_select);
+		free_structs(g_select);
 		return (error("error during malloc on t_list struct", ERR_MALLOC));
 	}
 	if (!(g_select->research = ft_strdup("")))
 	{
-		ft_memdel((void **)g_select->term);
-		ft_memdel((void **)g_select->list);
-		ft_memdel((void **)g_select);
+		free_structs(g_select);
 		return (error("error during malloc on research", ERR_MALLOC));
 	}
+	if (!(g_select->add_elem = ft_strdup("")))
+	{
+		free_structs(g_select);
+		return (error("error during malloc on add_elem", ERR_MALLOC));
+	}
+	g_select->flag_add_elem = 0;
 	return (0);
 }
 

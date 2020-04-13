@@ -18,9 +18,10 @@
 
 int		delete_research(t_select *select)
 {
-	ft_strdel(&select->research);
-	if (!(select->research = ft_strdup("")))
-		return (error("error during malloc on research", ERR_MALLOC));
+	if (select->flag_add_elem)
+		ft_bzero(select->add_elem, ft_strlen(select->add_elem));
+	else
+		ft_bzero(select->research, ft_strlen(select->research));
 	print_list(select);
 	return (0);
 }
@@ -31,11 +32,14 @@ int		delete_research(t_select *select)
 
 void	delete_char_research(t_select *select)
 {
-	select->research[ft_strlen(select->research) - 1] = '\0';
+	if (select->flag_add_elem)
+		select->add_elem[ft_strlen(select->add_elem) - 1] = '\0';
+	else
+		select->research[ft_strlen(select->research) - 1] = '\0';
 	print_list(select);
 }
 
-void	set_cursor_on(t_select *select, t_node *tmp, size_t sens)
+void	set_cursor_on_next(t_select *select, t_node *tmp)
 {
 	while (tmp)
 	{
@@ -45,10 +49,7 @@ void	set_cursor_on(t_select *select, t_node *tmp, size_t sens)
 			select->list->cursor = tmp;
 			break ;
 		}
-		if (sens == NEXT)
-			tmp = tmp->next;
-		else if (sens == PREV)
-			tmp = tmp->prev;
+		tmp = tmp->next;
 	}
 }
 
@@ -56,11 +57,22 @@ int		research(t_select *select, char buffkey)
 {
 	char *research_tmp;
 
-	research_tmp = ft_strdup(select->research);
-	ft_strdel(&select->research);
-	select->research = ft_stradd(research_tmp, buffkey);
-	ft_strdel(&research_tmp);
-	set_cursor_on(select, select->list->head, NEXT);
+	if (select->flag_add_elem)
+	{
+		research_tmp = ft_strdup(select->add_elem);
+		ft_strdel(&select->add_elem);
+		select->add_elem = ft_stradd(research_tmp, buffkey);
+		ft_strdel(&research_tmp);
+		print_list(select);
+	}
+	else
+	{
+		research_tmp = ft_strdup(select->research);
+		ft_strdel(&select->research);
+		select->research = ft_stradd(research_tmp, buffkey);
+		ft_strdel(&research_tmp);
+		set_cursor_on_next(select, select->list->head);
+	}
 	print_list(select);
 	return (0);
 }

@@ -23,6 +23,9 @@
 enum {ERR_USAGE, ERR_TTY, ERR_TERM, ERR_MALLOC, ERR_ARG_NOT_ASCII,
 	ERR_TCGETATTR, ERR_TCSETATTR, ERR_TERM_SIZE};
 
+# define N_FATAL		0
+# define FATAL			1
+
 /*
 ** Color Macro
 */
@@ -51,13 +54,6 @@ enum {ERR_USAGE, ERR_TTY, ERR_TERM, ERR_MALLOC, ERR_ARG_NOT_ASCII,
 # define RIGHT			185
 
 /*
-** Define for set_cursor_on direction
-*/
-
-# define NEXT			1
-# define PREV			2
-
-/*
 ** Termcaps structure
 */
 
@@ -79,6 +75,7 @@ typedef struct	s_term
 typedef struct	s_node
 {
 	char			*value;
+	short			alloc;
 	int				is_select;
 	size_t			len;
 	size_t			index;
@@ -110,6 +107,8 @@ typedef struct	s_select
 	t_list_hand	*list;
 	t_term		*term;
 	char		*research;
+	char		*add_elem;
+	size_t		flag_add_elem;
 }				t_select;
 
 /*
@@ -143,6 +142,7 @@ int				init_termcaps(t_term *term);
 */
 
 int				parsing(t_list_hand *list, char **argv);
+t_node			*new_node(t_node *last, char *arg, size_t index, short alloc);
 
 /*
 ** Printing functions
@@ -150,7 +150,7 @@ int				parsing(t_list_hand *list, char **argv);
 
 void			print_list(t_select *select);
 int				return_choice(t_node *head);
-int				error(char *err_mess, int err_code);
+int				error(char *err_mess, short err_code, short is_fatal);
 int				ft_putchar_input(int c);
 
 /*
@@ -160,12 +160,12 @@ int				ft_putchar_input(int c);
 int				research(t_select *select, char buffkey);
 void			delete_char_research(t_select *select);
 int				delete_research(t_select *select);
-void			set_cursor_on(t_select *select, t_node *tmp, size_t sens);
 
 /*
 ** Other
 */
 
+void			free_structs(t_select *select);
 int				ft_exit(t_select *select);
 void			check_file_exist(t_node *node);
 void			free_list(t_node *head);

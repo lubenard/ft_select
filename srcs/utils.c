@@ -37,6 +37,8 @@ void	free_list(t_node *head)
 	{
 		tmp = head;
 		head = head->next;
+		if (tmp->alloc)
+			ft_strdel(&tmp->value);
 		ft_memdel((void *)&tmp);
 	}
 }
@@ -61,7 +63,7 @@ int		ft_putchar_input(int c)
 	return (0);
 }
 
-int		error(char *err_mess, int err_code)
+int		error(char *err_mess, short err_code, short is_fatal)
 {
 	ft_dprintf(2, "Error: %s\n", err_mess);
 	return (err_code);

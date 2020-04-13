@@ -66,4 +66,7 @@ void		print_list(t_select *select)
 		print_search(select);
 	if (ft_strcmp(select->research, ""))
 		ft_dprintf(0, "\n\nResearch field: %s\n", select->research);
+	if (select->flag_add_elem)
+		ft_dprintf(0, "\n\nEnter the element you want to add: %s\n", \
+		select->add_elem);
 }

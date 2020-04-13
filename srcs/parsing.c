@@ -58,13 +58,17 @@ void		sort_ascii(t_list_hand *list)
 ** Create new node to connect to linked list
 */
 
-t_node		*new_node(t_node *last, char *arg, size_t index)
+t_node		*new_node(t_node *last, char *arg, size_t index, short alloc)
 {
 	t_node *node;
 
 	if (!(node = malloc(sizeof(t_node))))
 		return (0);
-	node->value = arg;
+	if (!alloc)
+		node->value = arg;
+	else
+		node->value = ft_strdup(arg);
+	node->alloc = alloc;
 	node->index = index;
 	node->len = ft_strlen(arg);
 	check_file_exist(node);
@@ -105,7 +109,7 @@ int			parsing(t_list_hand *list, char **argv)
 		detect_sort_opt(argv, &i, &sort);
 		if (!argv[i])
 			break ;
-		if (!(node = new_node(list->last, argv[i], i)))
+		if (!(node = new_node(list->last, argv[i], i, 0)))
 			return (error("error during malloc on node", ERR_MALLOC));
 		if (!list->last)
 			list->head = node;
