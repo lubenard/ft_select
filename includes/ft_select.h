@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/04/13 22:12:39 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/04/13 22:39:53 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct	s_node
 {
 	char			*value;
 	short			alloc;
-	int				is_select;
+	short			is_select;
 	size_t			len;
 	size_t			index;
 	char			color[7];
@@ -105,7 +105,7 @@ typedef struct	s_select
 	t_term		*term;
 	char		*research;
 	char		*add_elem;
-	size_t		flag_add_elem;
+	short		flag_add_elem;
 }				t_select;
 
 /*
