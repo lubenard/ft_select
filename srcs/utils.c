@@ -6,17 +6,17 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 11:06:02 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 13:59:43 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/04/13 22:13:26 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-int		return_choice(t_node *head)
+int		return_choice(t_select *select)
 {
 	t_node	*tmp;
 
-	tmp = head;
+	tmp = select->list->head;
 	while (tmp)
 	{
 		if (tmp->is_select)
@@ -26,6 +26,7 @@ int		return_choice(t_node *head)
 		}
 		tmp = tmp->next;
 	}
+	ft_exit(select);
 	return (0);
 }
 
@@ -63,7 +64,7 @@ int		ft_putchar_input(int c)
 	return (0);
 }
 
-int		error(char *err_mess, short err_code, short is_fatal)
+int		error(char *err_mess, short err_code)
 {
 	ft_dprintf(2, "Error: %s\n", err_mess);
 	return (err_code);

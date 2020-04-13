@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 13:45:02 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/04/13 22:12:39 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@
 
 enum {ERR_USAGE, ERR_TTY, ERR_TERM, ERR_MALLOC, ERR_ARG_NOT_ASCII,
 	ERR_TCGETATTR, ERR_TCSETATTR, ERR_TERM_SIZE};
-
-# define N_FATAL		0
-# define FATAL			1
 
 /*
 ** Color Macro
@@ -149,8 +146,8 @@ t_node			*new_node(t_node *last, char *arg, size_t index, short alloc);
 */
 
 void			print_list(t_select *select);
-int				return_choice(t_node *head);
-int				error(char *err_mess, short err_code, short is_fatal);
+int				return_choice(t_select *select);
+int				error(char *err_mess, short err_code);
 int				ft_putchar_input(int c);
 
 /*
@@ -160,6 +157,13 @@ int				ft_putchar_input(int c);
 int				research(t_select *select, char buffkey);
 void			delete_char_research(t_select *select);
 int				delete_research(t_select *select);
+
+/*
+** Add elements functions
+*/
+
+void			add_elem(t_select *select);
+int				confirm_new_elem(t_select *select);
 
 /*
 ** Other

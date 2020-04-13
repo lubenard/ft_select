@@ -6,7 +6,7 @@
 #    By: lubenard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 18:13:02 by lubenard          #+#    #+#              #
-#    Updated: 2020/03/27 14:33:47 by lubenard         ###   ########.fr        #
+#    Updated: 2020/04/13 21:55:15 by lubenard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ FILES		= main.c \
 			  move_keys.c \
 			  signals.c \
 			  research.c \
+			  add_elem.c \
 			  display.c \
 			  utils.c
 
