@@ -62,7 +62,7 @@ static void	handle_sigint(int signal)
 ** Handle Terminal resize
 */
 
-void	handle_resize(int signal)
+void		handle_resize(int signal)
 {
 	struct winsize w;
 
@@ -70,6 +70,8 @@ void	handle_resize(int signal)
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &w);
 	g_select->term->col = w.ws_col;
 	g_select->term->line = w.ws_row;
+	if (g_select->list->biggest_len <= 0)
+		return ;
 	if (!(g_select->list->nbr_elem = (g_select->term->col /
 	g_select->list->biggest_len)) || (int)(g_select->list->size /
 	g_select->list->nbr_elem) >= g_select->term->line)
@@ -90,6 +92,8 @@ void		handle_signals(void)
 	signal(SIGINT, handle_sigint);
 	signal(SIGCONT, handle_sigcont);
 	signal(SIGTSTP, handle_sigtstp);
+	signal(SIGSEGV, handle_sigint);
+	signal(SIGPIPE, handle_sigint);
 	signal(SIGKILL, handle_sigint);
 	signal(SIGQUIT, handle_sigint);
 	signal(SIGABRT, handle_sigint);

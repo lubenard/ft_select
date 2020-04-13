@@ -33,6 +33,8 @@ void		sort_ascii(t_list_hand *list)
 
 	first = list->head;
 	tmp = list->head;
+	if (!first)
+		return ;
 	while (tmp->next)
 	{
 		next = tmp->next;
@@ -113,5 +115,5 @@ int			parsing(t_list_hand *list, char **argv)
 	(sort) ? sort_ascii(list) : 0;
 	list->cursor = list->head;
 	list->size = (sort) ? i - 1 : i;
-	return (0);
+	return ((!list->head) ? error("No argument given", ERR_TTY) : 0);
 }

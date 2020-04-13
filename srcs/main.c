@@ -70,9 +70,9 @@ int			main(int argc, char **argv)
 		return (error("Usage: ./ft_g_select args1 args2 args3...", ERR_USAGE));
 	if ((ret_code = init_structs()))
 		return (ret_code);
-	if ((ret_code = init_termcaps(g_select->term)))
-		return (ret_code);
 	if ((ret_code = parsing(g_select->list, argv)))
+		return (ret_code);
+	if ((ret_code = init_termcaps(g_select->term)))
 		return (ret_code);
 	g_select->list->biggest_len =
 	compute_biggest_lenght(g_select->list->head);
