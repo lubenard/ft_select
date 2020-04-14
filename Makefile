@@ -6,12 +6,12 @@
 #    By: lubenard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 18:13:02 by lubenard          #+#    #+#              #
-#    Updated: 2020/04/13 21:55:15 by lubenard         ###   ########.fr        #
+#    Updated: 2020/04/14 18:31:12 by lubenard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= clang
-CFLAGS		= -Wall -Wextra -Werror -g3
+CFLAGS		= -Wall -Wextra -Werror
 
 NAME		= ft_select
 LIBFT		= libft
@@ -56,12 +56,10 @@ _WHITE		= \x1b[37m
 
 FSANITIZE	= false
 
-##### Customized rule to compile for specific version #####
-
 all: $(NAME)
 
 ifeq ($(FSANITIZE), true)
- CFLAGS += -fsanitize=address
+ CFLAGS += -g3 -fsanitize=address
 endif
 
 $(NAME): $(OBJS)
@@ -72,7 +70,7 @@ $(NAME): $(OBJS)
 
 $(OBJSDIR)/%.o: $(SRCSDIR)/%.c Makefile
 	@mkdir -p $(@D)
-	@echo -n -e "\r\033[K${_PURPLE}${BOLD}[${NAME}] Compiling $<${_END}"
+	@echo -n -e "\r\033[K${_PURPLE}${_BOLD}[$(NAME)] Compiling $<${_END}"
 	@$(CC) $(CFLAGS) -I $(INCDIR) -I $(LIBFT)/$(INCDIR) -MMD -o $@ -c $<
 
 libft:
@@ -81,7 +79,7 @@ libft:
 
 clean:
 	@$(MAKE) -C $(LIBFT) clean
-	@echo -e "${_RED}${_BOLD}Cleaning obj files from ${NAME}...${_END}"
+	@echo -e "${_RED}${_BOLD}Cleaning obj files from $(NAME)...${_END}"
 	@rm -f $(OBJS)
 	@rm -f $(OBJSD)
 	@rm -Rf $(OBJDIR)

@@ -6,11 +6,16 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/13 21:54:30 by lubenard          #+#    #+#             */
-/*   Updated: 2020/04/13 21:55:47 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/04/14 18:11:35 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+
+/*
+** When adding element is on, this validate the entry and add it
+** to the end of the linked list
+*/
 
 int		confirm_new_elem(t_select *select)
 {
@@ -29,6 +34,10 @@ int		confirm_new_elem(t_select *select)
 	ft_bzero(select->add_elem, ft_strlen(select->add_elem));
 	return (0);
 }
+
+/*
+** Activate or desactivate adding mode
+*/
 
 void	add_elem(t_select *select)
 {

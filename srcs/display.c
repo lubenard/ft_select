@@ -6,12 +6,16 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 14:29:43 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 13:47:57 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/04/14 18:13:20 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <term.h>
+
+/*
+** Print one elem of the list
+*/
 
 static void	print_elem(t_select *select, t_node *tmp, size_t *i)
 {
@@ -27,6 +31,10 @@ static void	print_elem(t_select *select, t_node *tmp, size_t *i)
 		*i = 0;
 	}
 }
+
+/*
+** Print the result of research
+*/
 
 static int	print_search(t_select *select)
 {

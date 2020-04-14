@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 14:47:35 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 15:59:27 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/04/14 18:13:48 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include "ft_select.h"
 
 t_select *g_select;
+
+/*
+** init structs for launch
+*/
 
 static int	init_structs(void)
 {

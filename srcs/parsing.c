@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 11:07:14 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 14:14:32 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/04/14 18:14:49 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ static void	switch_elem(t_node *first, t_node *next)
 	next->prev = first->prev;
 	first->prev = next;
 }
+
+/*
+** Perform ascii sort on options if --sort option is specified
+*/
 
 void		sort_ascii(t_list_hand *list)
 {

@@ -6,11 +6,15 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/14 11:06:02 by lubenard          #+#    #+#             */
-/*   Updated: 2020/04/13 22:13:26 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/04/14 18:15:59 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+
+/*
+** Return choices when user press enter
+*/
 
 int		return_choice(t_select *select)
 {
@@ -43,6 +47,10 @@ void	free_list(t_node *head)
 		ft_memdel((void *)&tmp);
 	}
 }
+
+/*
+** Compute the biggest len to help determine how to print options
+*/
 
 size_t	compute_biggest_lenght(t_node *head)
 {

@@ -6,13 +6,17 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 12:27:40 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 13:55:22 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/04/14 18:12:34 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <sys/stat.h>
 #include <sys/types.h>
+
+/*
+** Determine color following type of file
+*/
 
 static char	*determine_color(char *value)
 {
@@ -34,6 +38,10 @@ static char	*determine_color(char *value)
 	else
 		return (FT_WHITE);
 }
+
+/*
+** Determine if file exist, and if it is, choose color
+*/
 
 void		check_file_exist(t_node *node)
 {
