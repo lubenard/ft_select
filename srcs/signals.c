@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/24 18:34:21 by lubenard          #+#    #+#             */
-/*   Updated: 2020/03/30 14:02:05 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/04/14 19:13:38 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ extern t_select *g_select;
 static void	handle_sigtstp(int sig)
 {
 	(void)sig;
+	tputs(g_select->term->civis, 1, ft_putchar_input);
 	if (tcsetattr(0, TCSANOW, &g_select->term->old_terms))
 		return ;
 	tputs(g_select->term->civis, 1, ft_putchar_input);
-	ioctl(STDERR_FILENO, TIOCSTI, "\x1A");
+	ioctl(STDIN_FILENO, TIOCSTI, "\x1A");
 	signal(SIGTSTP, SIG_DFL);
 }
 
@@ -94,7 +95,7 @@ void		handle_signals(void)
 	signal(SIGTSTP, handle_sigtstp);
 	signal(SIGSEGV, handle_sigint);
 	signal(SIGPIPE, handle_sigint);
-	signal(SIGKILL, handle_sigint);
+	signal(SIGTERM, handle_sigint);
 	signal(SIGQUIT, handle_sigint);
 	signal(SIGABRT, handle_sigint);
 	signal(SIGWINCH, handle_resize);

@@ -6,7 +6,7 @@
 /*   By: lubenard <lubenard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/13 21:54:30 by lubenard          #+#    #+#             */
-/*   Updated: 2020/04/14 18:11:35 by lubenard         ###   ########.fr       */
+/*   Updated: 2020/04/20 18:15:24 by lubenard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ int		confirm_new_elem(t_select *select)
 	if (!select->list->last)
 		select->list->head = node;
 	select->list->last = node;
+	select->list->size++;
 	select->flag_add_elem = 0;
-	print_list(select);
+	handle_resize(0);
 	ft_bzero(select->add_elem, ft_strlen(select->add_elem));
 	return (0);
 }
