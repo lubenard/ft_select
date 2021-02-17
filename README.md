@@ -1,6 +1,8 @@
 # ft_select
 ft_select, an introduction to termcaps
 
+[Subject FR](ft_select.fr.pdf)
+
 ## How to build the project
 ```
 git clone https://github.com/lubenard/ft_select
